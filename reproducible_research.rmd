@@ -1,0 +1,349 @@
+---
+title: "The Importance of Open and Reproducible Research"
+author: "Eric Crandall"
+output:
+  beamer_presentation:
+    incremental: yes
+    theme: Berkeley
+    colortheme: dolphin
+  slidy_presentation:
+    incremental: yes
+  pdf:
+    toc: TRUE
+  ioslides_presentation:
+    incremental: yes
+  powerpoint_presentation:
+    reference_doc: images/powerpoint_template.pptx
+---
+
+## What is Reproducibility?
+
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf) gives this definition (especially for data analysis and computer science):
+
+> "The data and code used to make a finding are available and they
+> are presented in such a way that it is (relatively) straightforward
+> for an independent researcher to recreate the finding."
+
+---
+![GandrudFigure2.1](images/Gandrud_Figure21.png)
+
+---
+
+## This actually seldom happens.  
+
+Consider two interesting articles by Tim Vines: 
+* [The Availability of Research Data Declines Rapidly with Article Age](http://www.sciencedirect.com/science/article/pii/S0960982213014000)
+  + Contacted Authors of 516 datasets with morphological data for discriminant analysis published between 1991 and 2011
+  + Received only 101 datasets!
+
+  + "_of 516 articles published between 2 and 22 years ago...the odds of a data set being extant fell by 17% per year._"
+
+---
+
+![Vines et al. 2014: Figure1. The Effect of Article Age on Four Obstacles to Receiving Data from the Authors](images/Vines2014_1.png)
+
+---
+
+### Data not only need to be easily available, but methods also need to be reproducible
+
+* Gilbert et al. 2012 - [Recommendations for utilizing and reporting population genetic analyses: the reproducibility of genetic clustering using the program structure](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2012.05754.x/full)
+  + "_we reanalysed data sets gathered from papers using the software package 'structure'... 30% of analyses were unable to reproduce the same number of population clusters._"
+
+* Scientific articles have fairly detailed methods sections, but those are typically insufficient to actually reproduce an analysis.
+
+* Scientists owe it to themselves and their community to have an explicit record of all the steps in an analysis done at a computer.
+
+
+
+
+
+---
+
+## Why are Open Data and Reproducibility Important For Science?
+
+* Standard to judge scientific claims
+* Data and methods need to be openly available in order to be reproducible
+* Avoiding effort duplication
+* Encouraging cumulative knowledge development
+
+
+![Sea of Doubts](images/sea_of_doubts.jpg)
+
+
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
+
+---
+
+## Why are Open Data and Reproducibility Important for *You*?
+
+
+* Better work habits
+  + better, clearer documentation
+* Better teamwork
+* Re-analysis is easier
+* Higher research impact
+
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
+
+---
+
+## Tools for Research Reproducibility
+
+* Open Source Everything
+* R language
+* Rstudio and knitR
+* Markdown and LaTeX
+* Unix operating system
+* GitHub and git - version control (not covered in this class)
+* Creative Commons Licensing
+* [Online Repositories](http://oad.simmons.edu/oadwiki/Data_repositories) (Dryad, Genbank,GBIF, GEOME, new ones all the time)
+
+
+
+
+
+---
+
+## Open Science
+
+
+[Open Science Links](http://en.wikipedia.org/wiki/Open_science)
+
+* Open Data
+* Reproducible Methods
+* Open Access Publications
+
+![Big Data](images/bigdata_nielsen_nature.png)
+
+---
+
+## Reproducible Research Habits
+
+Good habits to get into as a student!
+ 
+[10 Things Every Graduate Student Should Do](http://datapub.cdlib.org/2014/10/14/the-10-things-every-new-grad-student-should-do/) By Carly Strasser
+
+---
+
+## Stop Using Excel!
+
+* OK, maybe not entirely - its good for quick visualizing, data entry, etc.
+* It tends to be a crutch.
+  + Stops you from thinking carefully about your data structure
+  + Stops you from learning better ways to handle data
+* Proprietary software
+* Easy to mess up your data, no provenance
+* [Dates!](http://support.microsoft.com/kb/214330)
+* At least keep your raw data in text format
+
+
+
+
+
+---
+
+## Learn to Code
+
+Any language.  
+
+R is a great starting place.
+
+Here is code to paste cells from excel into an R data frame!
+
+```{r, eval=FALSE}
+data <- read.table(pipe("pbpaste"),header=T) 
+
+```
+
+
+
+---
+
+## Make a plan for managing data in each project
+
+* Keep all data (and ideally analyses) in a text file
+* Think about your file structure
+
+![Gandrud Figure 1](images/gandrud_1.png)
+
+---
+
+## Make a plan for managing data in each project - 2
+
+* Document everything
+* Explicitly tie your files together
+* Data management plans are now explicitly required by the NSF and other funding agencies!!!
+![Gandrud Figure 2](images/gandrud_2.png)
+
+---
+
+## Keep an electronic (online) notebook
+
+* Document everything!!
+    * repeat your own analysis!!
+    * show others what you did
+    
+* Dokuwiki is great (keeps things in plain text)
+
+* I now use GitHub and Rmarkdown notebooks
+
+* [Go open if you're brave](https://ericcrandall.github.io/Palythoa_tuberculosa/)
+
+---
+
+## Communicate Your Science
+
+Start doing outreach now!
+
+[NSF vs. House Committee on Science](http://news.sciencemag.org/policy/2014/10/battle-between-nsf-and-house-science-committee-escalates-how-did-it-get-bad)
+
+![Science Mistrust](images/kqed.jpg)
+
+---
+
+## Publish Open-Access Articles
+
+* [Biology Failed the Internet](https://www.youtube.com/watch?v=fmeI_X3Ppow)
+  + Physics moved to pre-print servers a long time ago!
+  + Open access journals (e.g. PLoS) were supposed to be a stop-gap measure!
+* Many schools now have open-access funds
+* [The dark side of open-access](http://www.nytimes.com/2013/04/08/health/for-scientists-an-exploding-world-of-pseudo-academia.html?pagewanted=all&_r=0)
+* Most journals only own the "typesetting" (because that is all they did!). 
+  + [Therefore you may legally post a pre-print](http://datapub.cdlib.org/2012/11/06/researchers-make-your-previous-work-oa/)
+  + BiorXiv
+  + PeerJ
+  + Most universities now have pre-print platforms
+* ResearchGate, Academia.edu etc. are social networks whereby you are sharing articles with your "friends"
+
+
+
+
+---
+
+## Rstudio
+
+
+R studio is an Integrated Developer Environment for R
+* Is an IDE (integrated development environment) that _sits on top of_ R
+and makes it easier to interact with R.
+* Organizes your work in R in neatly-contained packages of work (typically data
+and code) called "projects"
+* Nothing mysterious about these---just collections of files stored together in
+a single directory on your computer.
+
+---
+
+# Git
+
+* A version control system, or VCS, tracks the history of changes as people and teams collaborate on projects together. As the project evolves, teams can run tests, fix bugs, and contribute new code with the confidence that any version can be recovered at any time. Developers can review project history to find out:
+  + Which changes were made?
+  + Who made the changes?
+  + When were the changes made?
+  + Why were changes needed?
+
+---
+
+## Github is a distributed version control system (DVCS)
+
+* DVCSs allow full access to every file, branch, and iteration of a project, and allows every user access to a full and self-contained history of all changes. 
+
+* Unlike once popular centralized version control systems, DVCSs like Git don’t need a constant connection to a central repository. Developers can work anywhere and collaborate asynchronously from any time zone.
+
+![Github DVCS](images/github_dvcs.jpg)
+---
+
+## Github is a distributed version control system (DVCS)
+
+* Without version control, team members are subject to redundant tasks, slower timelines, and multiple copies of a single project. 
+
+* To eliminate unnecessary work, Git and other VCSs give each contributor a unified and consistent view of a project, surfacing work that’s already in progress. Seeing a transparent history of changes, who made them, and how they contribute to the development of a project helps team members stay aligned while working independently.
+
+---
+
+## What's a repository?
+
+* A *repository*, or [Git](https://git-scm.com) project, encompasses the entire collection of files and folders associated with a project, along with each file’s revision history. 
+
+* The file history appears as snapshots in time called *commits*, and can be organized into multiple lines of development called branches. 
+
+* Because Git is a DVCS, repositories are self-contained units and anyone who owns a copy of the repository can access the entire codebase and its history.
+
+* Using the command line or other ease-of-use interfaces, a git repository also allows for: interaction with the history, cloning, creating branches, committing, merging, comparing changes across versions of code, and more.
+
+---
+
+## What's a repository?
+
+* Working in repositories keeps development projects organized and protected. Developers are encouraged to fix bugs, or create fresh features, without fear of derailing mainline development efforts. 
+
+* Through platforms like GitHub, Git also provides more opportunities for project transparency and collaboration. Public repositories help teams work together to build the best possible final product.
+
+---
+
+## The Github Flow
+
+[Video](https://www.youtube.com/watch?v=47E-jcuQz5c&index=1&list=PLg7s6cbtAD17Gw5u8644bgKhgRLiJXdX4)
+
+![The Github Flow](images/github_flow.jpg)
+---
+
+## The Github Flow
+
+The GitHub flow has six steps, each with distinct benefits when implemented:
+
+* Create a branch:Topic branches created from the canonical deployment branch (usually master) allow teams to contribute to many parallel efforts. Short-lived topic branches, in particular, keep teams focused and results in quick ships.
+
+* Add commits:Snapshots of development efforts within a branch create safe, revertible points in the project’s history.
+
+* Open a pull request:Pull requests publicize a project’s ongoing efforts and set the tone for a transparent development process.
+
+* Discuss and review code:Teams participate in code reviews by commenting, testing, and reviewing open pull requests. Code review is at the core of an open and participatory culture.
+
+* Merge:Upon clicking merge, GitHub automatically performs the equivalent of a local ‘git merge’ operation. GitHub also keeps the entire branch development history on the merged pull request.
+
+* Deploy:Teams can choose the best release cycles or incorporate continuous integration tools and operate with the assurance that code on the deployment branch has gone through a robust workflow.
+
+---
+
+## Alternatives to Github exist!
+
+* Bitbucket
+* Gitlab
+* Gitbucket
+
+
+## Let's make a new project from a Github repository
+
+Do This in RStudio:
+
+1. Select File -> New Project 
+1. Create project from:  Choose "Version Control"
+    1. Choose "Git"
+    1. Input the url of this repository
+      1.https://github.com/ericcrandall/reproducible_research
+    1. and put it somewhere in your home directory (browse to where you want to put it in the "create project as subdirectory of:")
+    1. Hit `Create Project`
+
+---
+
+
+## Intro to Rmarkdown
+* Designed as a text _markup_ language that would be
+    + Simple
+    + Expressive
+    + Intuitive
+    + Capable of conveying intent even without being
+      compiled into HTML or PDF
+* There are many Markdown interpreters.  The Rstudio folks
+  have been using [pandoc](http://johnmacfarlane.net/pandoc/)
+  to crunch Markdown into other formats. It provides many useful
+  extensions.
+* Customizations of style are mostly separate from the __content__.
+  
+* [This presentation was made in Rmarkdown!](https://bookdown.org/yihui/rmarkdown/presentations.html)
+
+---
+
