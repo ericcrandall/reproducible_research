@@ -2,19 +2,19 @@
 title: "Intro to Open and Reproducible Research"
 author: "Eric Crandall"
 output:
-  pdf:
-    toc: TRUE
-  slidy_presentation:
-    incremental: yes
-  ioslides_presentation:
-    incremental: yes
-  powerpoint_presentation:
-    reference_doc: images/powerpoint_template.pptx
   beamer_presentation:
     theme: Berkeley
     colortheme: dolphin
     keep_md: yes
     slide_level: 2
+  ioslides_presentation:
+    incremental: yes
+  pdf:
+    toc: TRUE
+  slidy_presentation:
+    incremental: yes
+  powerpoint_presentation:
+    reference_doc: images/powerpoint_template.pptx
 ---
 
 # What is Reproducibility?
@@ -135,9 +135,9 @@ R is a great starting place.
 
 Here is code to paste cells from excel into an R data frame!
 
-```{r, eval=FALSE}
-data <- read.table(pipe("pbpaste"),header=T) 
 
+```r
+data <- read.table(pipe("pbpaste"),header=T) 
 ```
 
 
@@ -217,7 +217,8 @@ a single directory on your computer.
 
 * All of this is stored as "commits" inside an invisible directory called .git
 
-```{bash eval = F}
+
+```bash
 /reproducible_research/--% ls .git
 COMMIT_EDITMSG  config          hooks           info            objects         refs
 HEAD            description     index           logs            packed-refs
@@ -363,7 +364,8 @@ that have changed or which are new.
     + But one could conceive of being more strategic...
     + at the command line, staging or adding all files to a commit is achieved by:
     
-```{bash, eval = F}
+
+```bash
 git add .
 ```
 
@@ -392,7 +394,8 @@ the Rstudio interface is very nice, IMHO)
 * Spending a little time to write informative commit messages can pay off.
 * At the command line, a commit is achieved thusly:
 
-```{bash, eval = F}
+
+```bash
 git commit -m "my commit message"
 
 ```
@@ -403,7 +406,8 @@ git commit -m "my commit message"
 * Easy inspection of past commits.
 * See what changes were made at each commit.
 * At the command line you can see this with 
-```{bash, eval = F}
+
+```bash
 git log
 ```
 
@@ -419,9 +423,90 @@ git log
 
 We can use R to list the files.  
 
-```{r list-git}
+
+```r
 # check out this file-system command in R
 dir(path = ".git", all.files = TRUE, recursive = TRUE)
+```
+
+```
+##  [1] "COMMIT_EDITMSG"                                                 
+##  [2] "config"                                                         
+##  [3] "description"                                                    
+##  [4] "HEAD"                                                           
+##  [5] "hooks/applypatch-msg.sample"                                    
+##  [6] "hooks/commit-msg.sample"                                        
+##  [7] "hooks/fsmonitor-watchman.sample"                                
+##  [8] "hooks/post-update.sample"                                       
+##  [9] "hooks/pre-applypatch.sample"                                    
+## [10] "hooks/pre-commit.sample"                                        
+## [11] "hooks/pre-merge-commit.sample"                                  
+## [12] "hooks/pre-push.sample"                                          
+## [13] "hooks/pre-rebase.sample"                                        
+## [14] "hooks/pre-receive.sample"                                       
+## [15] "hooks/prepare-commit-msg.sample"                                
+## [16] "hooks/push-to-checkout.sample"                                  
+## [17] "hooks/update.sample"                                            
+## [18] "index"                                                          
+## [19] "info/exclude"                                                   
+## [20] "logs/HEAD"                                                      
+## [21] "logs/refs/heads/main"                                           
+## [22] "logs/refs/remotes/origin/HEAD"                                  
+## [23] "logs/refs/remotes/origin/main"                                  
+## [24] "objects/00/f53ce8066a38abfe40f99ffb0a445aa32b8011"              
+## [25] "objects/02/70d3cbc9f83e4c2eb1e11d0a147c31e5a644c0"              
+## [26] "objects/10/c739a3d513015f61e52b5d978604f9d0d8f291"              
+## [27] "objects/11/bcf458a321651e68c7627ef6890bafccef0b18"              
+## [28] "objects/13/23e55fd16b1e4f7965bacc0223492a178de5dd"              
+## [29] "objects/16/a9cdea4ad9456d9f9c661f24a9a3eb57e689c6"              
+## [30] "objects/19/85083191e8b2f5505f36625f7edcb1a0d6412f"              
+## [31] "objects/1f/3ede9a9f986201addf75b29e70fa8c2a8477f9"              
+## [32] "objects/21/f7e34c7ff8b756b03724b544f5e2ce2b9b082f"              
+## [33] "objects/23/f63b97abe22805008c32a9658bfc895538b6aa"              
+## [34] "objects/24/f75cad5b119c80678c244d47312d0ad02fc670"              
+## [35] "objects/26/2b2cfc8ba24c825f6b64acbe3ca395b7ff2f31"              
+## [36] "objects/28/f0057bd3f9d33a7ace7e366f7ffa4dc210f944"              
+## [37] "objects/2a/c44c9b964f841a8a24cc396a7fb2876b8e8aa5"              
+## [38] "objects/2c/ad0aa1a595ebf0779e1388933dac6b412a7114"              
+## [39] "objects/36/548b376ebcc447a10b93353cd9b1dc0b259b06"              
+## [40] "objects/37/2f57b5b80902a0eb6202670cb509eb321be2be"              
+## [41] "objects/3d/3116d6bc440e1415d17474676199ffb85f545f"              
+## [42] "objects/50/45808a94d041c6f6b785bf9c7fcc6ca550d3eb"              
+## [43] "objects/51/6fb82804f5d310f7e3e16b9138291527f0fd2a"              
+## [44] "objects/66/c1d3e45021859c6a7d5bf4b6a5f4c8fd0ce340"              
+## [45] "objects/70/1f64ed543adeb4a93909fb7db24076c7ff0590"              
+## [46] "objects/70/e9f8bc14094dfe37e0994c17dbbb536a3a3d48"              
+## [47] "objects/7b/3778658c5a9060a506261167781e5d18c33841"              
+## [48] "objects/80/70e6a38cc8a0742e7c13872f8ef41b644528c7"              
+## [49] "objects/81/17a4006e63621d735764ad2d51daa41a8ed605"              
+## [50] "objects/83/002948bce0dcb03b633293a58dc2a776bf88ef"              
+## [51] "objects/86/5d5629ef55987fe68127c149a3c5050ab237d0"              
+## [52] "objects/8e/3c2ebc99e2e337f7d69948b93529a437590b27"              
+## [53] "objects/96/f3bba4fe892703a8e364e79e08cc07721eccd5"              
+## [54] "objects/99/1898f18b7e0fc860e99e701e8ffceeb8ad2ed9"              
+## [55] "objects/bc/746a8952dc080a92ad1157f4280792168b1b87"              
+## [56] "objects/c8/959054c5e1331ea7170c3d94c487563782269a"              
+## [57] "objects/cb/b99a7196a266cb4e958f2bfc031bf478422080"              
+## [58] "objects/cd/dcc43841aa35f5553ab949d7c98f640074c576"              
+## [59] "objects/d0/603c55847f6fb92b975f6c989f4f24a7ffe131"              
+## [60] "objects/d0/63e8bc7af719bae7c8eb42a8bc12891480f305"              
+## [61] "objects/d2/11a25fb11a40ea713785f8e91c066682ca8e87"              
+## [62] "objects/d2/23b29197c549e12c83368d039f791fd74c3f93"              
+## [63] "objects/d4/c50d6843671ed282ae1d42d314c2edf01a8d76"              
+## [64] "objects/e7/cdfc9e85df4a28de8208cb8fff47fa8880ec97"              
+## [65] "objects/e8/a26260ce3b15f4349b41e19fc96f4ac05db927"              
+## [66] "objects/ea/0cbadfc24142a0ab84ef1ca35c5badf5f9318e"              
+## [67] "objects/ed/de644a9bc63ad2e7adafb59ab3f161c237673e"              
+## [68] "objects/f6/2cd7ba4a791cccad8b3ba40b15e023803be5a3"              
+## [69] "objects/f9/bac9fa4535cde8e9166a09ed4cc091aa4255b0"              
+## [70] "objects/fd/94b1c9d48ef9cbf72354a4eb9c57e923619b70"              
+## [71] "objects/fe/34adfb051b10b4fe9552744c72059ede597991"              
+## [72] "objects/pack/pack-73ddbaccd0bd543cfe129a05ce137348072fa9db.idx" 
+## [73] "objects/pack/pack-73ddbaccd0bd543cfe129a05ce137348072fa9db.pack"
+## [74] "packed-refs"                                                    
+## [75] "refs/heads/main"                                                
+## [76] "refs/remotes/origin/HEAD"                                       
+## [77] "refs/remotes/origin/main"
 ```
 
 
@@ -480,7 +565,8 @@ Add "github pages"
 replacing the name "John Doe" with yours, and his email with yours.
     + Use the email address that you gave to GitHub.
     
-```{bash eval = F}
+
+```bash
 git config --global user.name "John Doe"
 git config --global user.email johndoe@example.com
 ```

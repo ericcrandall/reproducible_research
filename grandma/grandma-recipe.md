@@ -3,23 +3,21 @@ title: "Grandma's Glop Recipe"
 csl: molecular-ecology.csl
 theme: cerulean
 output:
-  pdf_document:
-    number_sections: yes
-    toc: yes
-  word_document: default
   html_document: 
     highlight: pygments
     toc: yes
     keep_md: yes
+  word_document: default
+  pdf_document:
+    highlight: pygments
+    number_sections: yes
+    toc: yes
+    theme: paper
 bibliography: glop.bib
 ---
 
 
 
-```{r setup, include=FALSE}
-# This is a comment about the markdown.
-library(ggplot2)
-```
 
 # Prelude
 Many thanks to my r-mentor [Eric Anderson](https://swfsc.noaa.gov/staff.aspx?id=740) for sharing this lesson.
@@ -113,7 +111,8 @@ mandatory)!
 - 1 Pound of Grandma Gorp:
     + 0.5 pounds raisins
     * 0.5 pounds cashews
-    ```{r, eval=FALSE}
+    
+    ```r
     # you can indent R code blocks if you want them 
     # indented to pertain to list items.
     ```
@@ -222,31 +221,45 @@ Thankfully, we can use R to do it for us.  We make a
 a data frame of values, then use a nifty function `kable`
 from the `knitr` package to make the table.  Get ready,
 we are going to use some R:
-```{r make-the-tam-table}
+
+```r
 # first make the data frame
 temps <- rep(seq(300,500,50), 5)
 alts <- rep(seq(0, 5000, 1250), each=5)
-tab <- data.frame(Temps = temps, Altitude = alts, 
-                  CookTime = (20-sqrt(temps/4)) * ((alts+5000)/2500) ^ (3/2))
+tab <- data.frame(T = temps, a = alts, M = (20-sqrt(temps/4)) * ((alts+5000)/2500) ^ (3/2))
 ```
 And then we print it and it looks like this
 
-```{r kable-it, results='asis', echo=FALSE}
-library(knitr) # requires this package
-kable(tab)
-```
+
+|   T|    a|        M|
+|---:|----:|--------:|
+| 300|    0| 32.07365|
+| 350|    0| 30.11103|
+| 400|    0| 28.28427|
+| 450|    0| 26.56854|
+| 500|    0| 24.94577|
+| 300| 1250| 44.82428|
+| 350| 1250| 42.08144|
+| 400| 1250| 39.52847|
+| 450| 1250| 37.13067|
+| 500| 1250| 34.86277|
+| 300| 2500| 58.92305|
+| 350| 2500| 55.31749|
+| 400| 2500| 51.96152|
+| 450| 2500| 48.80953|
+| 500| 2500| 45.82830|
+| 300| 3750| 74.25153|
+| 350| 3750| 69.70801|
+| 400| 3750| 65.47900|
+| 450| 3750| 61.50704|
+| 500| 3750| 57.75026|
+| 300| 5000| 90.71797|
+| 350| 5000| 85.16685|
+| 400| 5000| 80.00000|
+| 450| 5000| 75.14719|
+| 500| 5000| 70.55728|
 
  : Cooking times, $M$, at various temperatures, $T$, and elevations, $a$.
-
-
-And we can plot this puppy.
-
-```{r}
-ggplot(tab, mapping = aes(x = CookTime, y = Altitude, color = Temps)) + 
-  geom_point() +
-  scale_color_gradient(low = "blue", high = "red")
-
-```
 
 
 ## Calculating Recipe Quantities {#calc-quants}
@@ -257,34 +270,33 @@ simply look at how we would list the ingredients.
 First, make an R code block where we declare
 the quantities:
 
-```{r quants}
+
+```r
 amts <- c(Flour = 2, Eggs = 4, Raisins = 0.5, Cashews = 0.5)
 mult <- 40 # make a mult-fold version of the recipe
 aa <- amts * mult
 ```
 
 Then access those variables inline in the list.  For example:
-In order to make `r mult` times the standard recipe, you will
+In order to make 40 times the standard recipe, you will
 need
 
-* `r aa["Flour"]` cups flour
-* `r aa["Eggs"]` eggs
-* `r aa["Raisins"] + aa["Cashews"]` lbs of Grandma Gorp:
-    + `r aa["Raisins"]` lbs raisins
-    + `r aa["Cashews"]` lbs cashews
+* 80 cups flour
+* 160 eggs
+* 40 lbs of Grandma Gorp:
+    + 20 lbs raisins
+    + 20 lbs cashews
     
 And, if you want to make $\pi$ times the standard recipe
 you need:
 
-```{r, include=FALSE}
-aa <- amts * pi
-```
 
-* `r aa["Flour"]` cups flour
-* `r aa["Eggs"]` eggs
-* `r aa["Raisins"] + aa["Cashews"]` lbs of Grandma Gorp:
-    + `r aa["Raisins"]` lbs raisins
-    + `r aa["Cashews"]` lbs cashews
+
+* 6.2831853 cups flour
+* 12.5663706 eggs
+* 3.1415927 lbs of Grandma Gorp:
+    + 1.5707963 lbs raisins
+    + 1.5707963 lbs cashews
 
 Of course, had we wanted to, we could have stuck that
 in a `kable` table, too.
@@ -301,8 +313,52 @@ many different ways.  I chose BibTeX because that is what I am
 used to.  The citation data base for this document is `blop.bib`
 which looks like this:
 
-```{r cat-bibfile, echo=FALSE, comment=NA, size=1}
-cat(readLines("glop.bib"), sep="\n")
+
+```
+@article{will2014,
+  title={A comparison of cooking times for {C}hinook salmon in the {C}alifornia {C}urrent and at higher elevations},
+  author={Satterthwaite, William H and Mohr, Michael S and O’Farrell, Michael R and Anderson, Eric C and Banks, Michael A and Bates, Sarah J and Bellinger, M Renee and Borgerson, Lisa A and Crandall, Eric D and Garza, John Carlos and others},
+  journal={Transactions of the American Fisheries Society},
+  volume={143},
+  number={1},
+  year={2014},
+  publisher={Taylor \& Francis}
+}
+
+
+@article{crandall2016,
+  title={Next-generation oven technology and its impact on cooking times for {G}reen {S}turgeon},
+  author={Crandall, Eric D and Skaug, Hans J and Barshis, Daniel J},
+  journal={Molecular Ecology},
+  volume={23},
+  number={3},
+  pages={502--512},
+  year={2016},
+  publisher={Wiley Online Library}
+}
+
+
+@article{abadia2013,
+  title={Large-scale parentage analysis reveals reproductive patterns and variation in cooking times for steelhead ({\em Oncorhynchus mykiss})},
+  author={Abadia-Cardoso, Alicia and Anderson, Eric C and Pearse, Devon E and Carlos Garza, John},
+  journal={Molecular Ecology},
+  volume={22},
+  number={18},
+  pages={4733--4746},
+  year={2013},
+  publisher={Wiley Online Library}
+}
+
+@article{boughton2009spatial,
+  title={Spatial patterning of habitat for Oncorhynchus mykiss in a system of intermittent and perennial streams},
+  author={Boughton, DA and Fish, H and Pope, J and Holt, G},
+  journal={Ecology of Freshwater Fish},
+  volume={18},
+  number={1},
+  pages={92--105},
+  year={2009},
+  publisher={Wiley Online Library}
+}
 ```
 
 Note that by default only the citations in your
