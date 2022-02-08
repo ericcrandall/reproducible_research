@@ -2,11 +2,11 @@
 title: "Grandma's Glop Recipe"
 csl: molecular-ecology.csl
 output:
-  word_document: default
   pdf_document:
     highlight: pygments
     number_sections: yes
     toc: yes
+  word_document: default
   html_document:
     highlight: pygments
     theme: journal
@@ -20,6 +20,8 @@ bibliography: glop.bib
 ```
 # Prelude
 Many thanks to my r-mentor [Eric Anderson](https://swfsc.noaa.gov/staff.aspx?id=740) for sharing this lesson.
+
+![Eric Anderson](../images/Eric-Anderson-60.jpg)
 
 This is an R Markdown document. Markdown
 is a simple formatting syntax for authoring 
@@ -74,7 +76,10 @@ We might come back to this [Dedication](#tag-it) at some point,
 so we have linked it to a tag.  Note that it does not seem
 you can link to arbitrary text, but you can to section headers.
 
+# The Recipe
+
 ## The Ingredients (Static Version) 
+
 Let's list those ingredients for a single recipe's
 worth of Grandma's Glop. We call it "static"
 because it applies to just a single recipe.
@@ -134,7 +139,8 @@ And do keep in mind that a blank line equates to a
 paragraph break.
 
 
-### Static table version {#static-recipe-list}
+### Static table version {#static-table-list}
+
 We could also have written that stuff out in a table.
 There are actually lots of ways to write tables.  See
 [this link](http://rmarkdown.rstudio.com/authoring_pandoc_markdown.html#tables).
@@ -171,7 +177,7 @@ Note that you can put whatever number you want in the front
 and the markdown interpreter will figure out which numbers
 they should be.  The numbers must be followed by a period!
 
-### Cooking time: It's complicated
+## Cooking time: It's complicated
 
 Now, the big trick to getting grandma's glop just right
 is cooking it for the proper length of time.  Describing
@@ -198,7 +204,8 @@ on cooking times of Chinook salmon at altitude [@will2014] and
 for steelhead at different temperatures [@abadia2013]. But please
 bear in mind that we did not account for the issues noted
 by @crandall2016 which arise while using next
-generation oven technology.
+generation oven technology. You can easily add citations by 
+clicking "Addins" and "Insert Citations"
 
 
 Clearly, it would be nice to have a table of cooking
@@ -229,16 +236,19 @@ kable(tab)
 
 
 ## Calculating Recipe Quantities {#calc-quants}
+
 This could be done several ways, but let us
 simply look at how we would list the ingredients.
 
 First, make an R code block where we declare
 the quantities:
+
 ```{r quants}
 amts <- c(Flour = 2, Eggs = 4, Raisins = 0.5, Cashews = 0.5)
 mult <- 40 # make a mult-fold version of the recipe
 aa <- amts * mult
 ```
+
 Then access those variables inline in the list.  For example:
 In order to make `r mult` times the standard recipe, you will
 need
@@ -251,6 +261,7 @@ need
     
 And, if you want to make $\pi$ times the standard recipe
 you need:
+
 ```{r, include=FALSE}
 aa <- amts * pi
 ```
@@ -264,18 +275,22 @@ aa <- amts * pi
 Of course, had we wanted to, we could have stuck that
 in a `kable` table, too.
 
+# More notes about markdown
+
 ## A note about citations and references
-This seems to be a relatively new feature.  It works almost adequately.
-I don't think it does in-text citations very well.  You can define
+
+You can define
 different styles in a "CSL" file which you can put where Rstudio
 can find it (in your project) and then call it out in the YAML
 header.  You apparently can store your citation database in 
 many different ways.  I chose BibTeX because that is what I am
 used to.  The citation data base for this document is `blop.bib`
 which looks like this:
+
 ```{r cat-bibfile, echo=FALSE, comment=NA, size=1}
 cat(readLines("glop.bib"), sep="\n")
 ```
+
 Note that by default only the citations in your
 data base that actually got cited will be included
 in the References.
@@ -294,12 +309,13 @@ and you can find plenty of other good links at the bottom
 of this [page](http://rmarkdown.rstudio.com/).
 
 ## Making PDF and Word documents
+
 To make a PDF document you need the TeX typesetting engine.
 It is free, but many of you probably don't have it yet.
 
 To make a Word doc, click the down triangle to the right of
 "Knit HTML" and choose "Knit Word".  Can you figure out what
-changes in the docment? (Again, it is textual and transparent!)
+changes in the document? (Again, it is textual and transparent!)
 Contrast that to the Word document itself---do this at your Unix
 command prompt (in the right directory of course):
 ```
@@ -307,6 +323,7 @@ cat auto-recipe.docx
 ```
 
 ### Changing styles and templates
+
 Wanna have a different look?  Try the "Gear" link to the
 right of the "Knit HTML" button.  Notice how changes there
 change things in the YAML header. 

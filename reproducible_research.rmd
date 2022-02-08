@@ -279,9 +279,9 @@ them back.
   
 ---
 
-## Github is a distributed version control system (DVCS)
+## GitHub (and others) is a distributed version control system (DVCS)
 
-* Git stores "snapshots" of your collection of files in a repository
+* Git stores "snapshots" of your collection of files in a repository, which can be stored on GitHub
 * For our work, the "collection of files" will be "the stuff in your RStudio project"
     + Another reason it is nice to keep everything you need for a project together in a "project directory"
 * When you clone or repository, __you__ get the whole version history 
@@ -289,12 +289,12 @@ them back.
 * Git has well-developed features for merging changes made in different repositories
     + But, for today, we will talk mostly of a single user interacting with git.
 
-* Unlike once popular centralized version control systems (rcs, cvs, subversion), DVCSs like Github don’t need a constant connection to a central repository. Developers can work anywhere and collaborate asynchronously from any time zone.
+* Unlike once popular centralized version control systems (rcs, cvs, subversion), DVCSs like GitHub don’t need a constant connection to a central repository. Developers can work anywhere and collaborate asynchronously from any time zone.
 
 ![Github DVCS](images/github_dvcs.jpg)
 ---
 
-## Github (and others) is a distributed version control system (DVCS)
+## GitHub (and others) is a distributed version control system (DVCS)
 
 
 * Git and a DVCS system allow multiple people to work on multiple versions ("branches") of a piece of software at the same time, without breaking the main branch. This approach can be used to add features or fix bugs.
@@ -309,11 +309,11 @@ them back.
 
 ## What's a repository?
 
-* A *repository*, or [Git](https://git-scm.com) project, encompasses the entire collection of files and folders associated with a project, along with each file’s revision history. 
+* A *repository*, or [Git](https://git-scm.com) project, encompasses the entire collection of files and folders associated with a project (i.e. a directory), *along with each file’s revision history*. 
 
 * The file history appears as snapshots in time called *commits*, and can be organized into multiple lines of development called branches. 
 
-* Because Git is a DVCS, repositories are self-contained units and anyone who owns a copy of the repository can access the entire codebase and its history.
+* Because Github is a DVCS, repositories are self-contained units and anyone who owns a copy of the repository can access the entire codebase and its history.
 
 * Using the command line or other ease-of-use interfaces, a git repository also allows for: interaction with the history, cloning, creating branches, committing, merging, comparing changes across versions of code, and more.
 
@@ -338,7 +338,7 @@ them back.
 
 The GitHub flow has six steps, each with distinct benefits when implemented:
 
-* Create a branch:Topic branches created from the canonical deployment branch (usually master) allow teams to contribute to many parallel efforts. Short-lived topic branches, in particular, keep teams focused and results in quick ships.
+* Create a branch:Topic branches created from the canonical deployment branch (usually master) allow teams to contribute to many parallel efforts. Short-lived topic branches, in particular, keep teams focused and results in quick ships.
 
 * Add commits:Snapshots of development efforts within a branch create safe, revertible points in the project’s history.
 
@@ -388,12 +388,23 @@ that have changed or which are new.
     to stage its disappearance and commit.
     + __Purple-R__ a file that was renamed.  (Note that git in Rstudio seems to be
     figuring this out on its own.)
+* You can click on various files to stage them to be part of a commit.
+    + I generally stage all changes for every commit
+    + But one could conceive of being more strategic...
+    + at the command line, staging or adding all files to a commit is achieved by:
+    
+```{bash, eval = f}
+git add .
+```
 
 ---    
-### The Diff window
+### The Commit window
 
-* Shows what has changed between the last committed version of a file and its
+* Click "commit" to reach the commit window
+* Shows a "diff" of your changes.
+* In other words, what has changed between the last committed version of a file and its
 current state.
+* Green = additions, red = deletions
 * Holy smokes this is convenient
 * (Note: all this output is available from the command line, but
 the Rstudio interface is very nice, IMHO)
@@ -404,13 +415,27 @@ the Rstudio interface is very nice, IMHO)
 * Super easy:
     + After staging the files you want to commit...
     + Write a brief message (first line short, then as much after that as you want)
-    and hit the commit button.
+    and hit the commit button. 
+* Tradition is to use present tense when describing your changes.
+    + as in "Add new data file, update file slurping code"
+* This can be really handy when trying to find where you made an error!
+* Spending a little time to write informative commit messages can pay off.
+* At the command line, a commit is achieved thusly:
+
+```{bash, eval = F}
+git commit -m "my commit message"
+
+```
 
 ---  
 ### The History window
 
-* Easy inspection past commits.
+* Easy inspection of past commits.
 * See what changes were made at each commit.
+* At the command line you can see this with 
+```{bash, eval = F}
+git log
+```
 
 ---
 ## How does git store and keep track of things {#git-how}
@@ -475,3 +500,9 @@ by default.
 
 ---
 
+
+### To Do
+
+Add Merge Conflicts
+Add Revert
+Add Rebase
