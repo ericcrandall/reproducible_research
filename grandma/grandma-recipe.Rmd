@@ -3,10 +3,11 @@ title: "Grandma's Glop Recipe"
 csl: molecular-ecology.csl
 theme: cerulean
 output:
-  pdf_document:
+  word_document: default
+  pdf_document: 
     number_sections: yes
     toc: yes
-  word_document: default
+    keep_tex: yes
   html_document: 
     highlight: pygments
     toc: yes
