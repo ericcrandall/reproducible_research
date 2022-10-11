@@ -1,0 +1,186 @@
+---
+title: "Linux Shell and Remote "
+format: 
+  revealjs:
+    theme: solarized
+    transition: concave
+    incremental: true
+
+---
+# Introducing the Shell
+
+## Background
+ 
+At a high level, computers do four things:
+
+::: {.incremental}
+- run programs
+- store data
+- communicate with each other, and
+- interact with us
+:::
+
+##  {.smaller}
+
+They can do the last of these in many different ways,
+including direct brain-computer interfaces and speech recognition, using systems such as Alexa or Google Home.
+While such hardware interfaces are becoming more commonplace, most interaction is still
+done using screens, mice, touchpads and keyboards.
+
+
+Although most modern desktop operating systems communicate with their human users by
+means of windows, icons and pointers, these software technologies didn't become
+widespread until the 1980s. The roots of such *graphical user interfaces* go back
+to Doug Engelbart's work in the 1960s, which you can see in what has been
+called "[The Mother of All Demos](http://www.youtube.com/watch?v=a11JDLBXtPQ)".
+
+
+
+## The Command-Line Interface {.smaller}
+
+Going back even further,
+the only way to interact with early computers was to rewire them.
+But in between,
+from the 1950s to the 1980s,
+most people used line printers.
+These devices only allowed input and output of the letters, numbers, and punctuation found on a standard keyboard,
+so programming languages and software interfaces had to be designed around that constraint.
+
+This kind of interface is called a
+**command-line interface**, or CLI,
+to distinguish it from a
+**graphical user interface**, or GUI,
+which most people now use.
+
+:::: {.columns}
+
+:::{.column width="60%"}
+![Original Command Line Interface: Marcin Wichary](https://upload.wikimedia.org/wikipedia/commons/2/23/TTY33ASR.jpg)
+:::
+
+:::{.column width="40%"}
+![Apple II with Basic](https://upload.wikimedia.org/wikipedia/commons/f/fc/Applesoft_BASIC.png)
+:::
+
+::::
+
+---
+
+:::: {.columns}
+
+:::{.column width="30%"}
+![Line Printer](images/line_printer.png)
+
+:::
+
+:::{.column width="70%"}
+![Computer with Terminal](images/computer_terminal.png)
+:::
+
+::::
+
+---
+
+The heart of a CLI is a **read-evaluate-print loop**, or REPL:
+when the user types a command and then presses the Enter (or Return; for Carriage Return) key,
+the computer reads it,
+executes it,
+and prints its output.
+The user then types another command,
+and so on until the user logs off.
+
+![Read Evaluate Print: REPL](https://static.javatpoint.com/core/images/read-eval-print-loop-in-java.png)
+
+## The Shell {.smaller}
+
+This description makes it sound as though the user sends commands directly to the computer,
+and the computer sends output directly to the user.
+In fact,
+there is usually a program in between called a
+**command shell**.
+What the user types goes into the shell,
+which then figures out what commands to run and orders the computer to execute them.
+(Note that the shell is called "the shell" because it encloses the operating system
+in order to hide some of its complexity and make it simpler to interact with.)
+
+![REPL with Command Shell and Kernel](images/command_shell.png)
+
+## Bash {.smaller}
+
+A shell is a program like any other.
+What's special about it is that its job is to run other programs
+rather than to do calculations itself.
+The most popular Unix/Linux shell is Bash,
+the Bourne Again SHell
+(so-called because it's derived from a shell written by Stephen Bourne).
+Bash is the default shell on most modern implementations of Unix
+and in most packages that provide Unix-like tools for Windows.
+
+![Bash Shell and Kernel](images/shell_kernel.jpg)
+
+## A Brief History of Unix {.smaller}
+
+::: {.incremental}
+
+- Developed at AT&T Bell Labs by Ken Thompson and Dennis Ritchie in the mid-60’s 
+- Became popular in academia in the 70’s and 80’s 
+- Was heavily commercialized in the 80’s 
+- As a reaction, Richard Stallman developed GNU (Gnu’s not Unix) 
+- Linus Torvalds also developed an open-source version - Linux 
+- Mac OSX is built entirely on top of a unix system (so commercialized again)
+  - they recently replaced bash with zsh {shrug}
+
+:::
+
+## Characterized by:
+
+- hierarchical file system
+- use of plain text for storing data and commands
+- large number of simple programs that can be strung together
+
+-  >“the power of a system comes from the relationships among programs rather than the programs themselves” Kernigan and Pike 1984 
+
+## Heirarchical File System
+
+![Example File System](images/file_system.png)
+
+## Using Bash {.smaller}
+
+Using Bash or any other shell sometimes *feels* more like programming than like using a mouse:
+
+ - Commands are terse (often only a couple of characters long),
+ - their names are frequently cryptic
+ - syntax is not simple or even consistent (but neither is English...)
+ - their output is lines of text rather than something visual like a graph.
+ - with great power comes great responsibility
+
+ However, Bash is more akin to using an operating system like Windows or MacOS than using a computer language. 
+
+
+
+## On the other hand... {.smaller}
+
+... with only a few keystrokes, the Bash shell acts as:
+
+-  Glue: combine existing tools into powerful pipelines
+  - through scripts or pipelines 
+  - Powerful and transformative
+
+- Automator: handle large volumes of data automatically, thereby making our work
+  - You generally can’t automate actions in Windows or MacOS (of course there are recordable macros but they are unwieldy).
+  - With a shell, once you figure out how to do something, you can set it up and let it run over and over again
+
+- Archive: Records the commands you type so you can inspect and repeat them later. 
+  - much more reproducible
+  - an electronic lab notebook
+
+- Communicator: easily interact with remote servers
+
+
+
+
+## It is worth your time to learn it! {.smaller}
+
+As we move more and more into cloud computing for scientific analysis of "big data", we are actually moving away from GUI and back toward CLI!
+
+![“Unix is user-friendly. It's just very selective about who its friends are.”](images/scripting_cartoon.png)
