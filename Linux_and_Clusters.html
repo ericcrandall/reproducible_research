@@ -9,7 +9,8 @@
 <link href="Linux_and_Clusters_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.1.189">
 
-  <title>Linux Shell and Remote</title>
+  <meta name="author" content="Eric Crandall">
+  <title>Introducing the Linux Bourne-Again Shell (bash)</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -27,6 +28,70 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Linux_and_Clusters_files/libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="Linux_and_Clusters_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -323,16 +388,18 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Linux Shell and Remote</h1>
+  <h1 class="title">Introducing the Linux Bourne-Again Shell (bash)</h1>
+  <p class="author">Eric Crandall</p>
 </section>
+
+<section id="or-how-i-learned-to-stop-worrying-and-love-the-command-line" class="title-slide slide level1 smaller center">
+<h1>Or, how I learned to stop worrying and love the command line</h1>
+
+<img data-src="https://blog.42mate.com/wp-content/uploads/2017/05/bash-shellshock.png" class="r-stretch"></section>
 
 <section>
-<section id="introducing-the-shell" class="title-slide slide level1 center">
-<h1>Introducing the Shell</h1>
-
-</section>
-<section id="background" class="slide level2">
-<h2>Background</h2>
+<section id="background" class="title-slide slide level1 center">
+<h1>Background</h1>
 <p>At a high level, computers do four things:</p>
 <div>
 <ul>
@@ -436,6 +503,21 @@
 <h2>Heirarchical File System</h2>
 
 <img data-src="images/file_system.png" class="r-stretch quarto-figure-center"><p class="caption">Example File System</p></section>
+<section id="paths-absolute-vs.-relative" class="slide level2">
+<h2>Paths: Absolute vs.&nbsp;Relative</h2>
+<ul>
+<li class="fragment">Absolute Path
+<ul>
+<li class="fragment">specifies the location of a file or directory from the root directory(/)</li>
+<li class="fragment">“208 Mueller Lab, University Park, PA 16802”</li>
+<li class="fragment">/Users/edc5240</li>
+</ul></li>
+<li class="fragment">Relative Path</li>
+<li class="fragment">path related to the present working directory(pwd).</li>
+<li class="fragment">“Take a left on Atherton, take it through downtown State College and past the bus station, right on Curtin, keep left, just past the library, take a right into the parking circle, you’ll see a loading dock. Park there.</li>
+<li class="fragment">../../usr/lib</li>
+</ul>
+</section>
 <section id="using-bash" class="slide level2 smaller">
 <h2>Using Bash</h2>
 <p>Using Bash or any other shell sometimes <em>feels</em> more like programming than like using a mouse:</p>
@@ -446,15 +528,15 @@
 <li class="fragment">their output is lines of text rather than something visual like a graph.</li>
 <li class="fragment">with great power comes great responsibility</li>
 </ul>
+<div class="fragment">
 <p>However, Bash is more akin to using an operating system like Windows or MacOS than using a computer language.</p>
+</div>
 </section>
 <section id="on-the-other-hand" class="slide level2 smaller">
 <h2>On the other hand…</h2>
 <p>… with only a few keystrokes, the Bash shell acts as:</p>
 <ul>
 <li class="fragment"><p>Glue: combine existing tools into powerful pipelines</p></li>
-<li class="fragment"><p>through scripts or pipelines</p></li>
-<li class="fragment"><p>Powerful and transformative</p></li>
 <li class="fragment"><p>Automator: handle large volumes of data automatically, thereby making our work</p>
 <ul>
 <li class="fragment">You generally can’t automate actions in Windows or MacOS (of course there are recordable macros but they are unwieldy).</li>
@@ -472,10 +554,158 @@
 <h2>It is worth your time to learn it!</h2>
 <p>As we move more and more into cloud computing for scientific analysis of “big data”, we are actually moving away from GUI and back toward CLI!</p>
 
-<img data-src="images/scripting_cartoon.png" class="r-stretch quarto-figure-center"><p class="caption">“Unix is user-friendly. It’s just very selective about who its friends are.”</p><div class="footer footer-default">
+<img data-src="images/scripting_cartoon.png" class="r-stretch quarto-figure-center"><p class="caption">“Unix is user-friendly. It’s just very selective about who its friends are.”</p></section></section>
+<section>
+<section id="environments-and-environmental-variables" class="title-slide slide level1 center">
+<h1>Environments and Environmental Variables</h1>
+
+</section>
+<section id="environmental-variables" class="slide level2 smaller">
+<h2>Environmental Variables</h2>
+<p>So we’ve visualized the shell as commands that communicate with the cpu through the kernel. But, what actually happens when you type a command, like <code>ls</code> into your terminal? How does the computer know what to do with it?</p>
+<ul>
+<li class="fragment">Whenever you type a command, your computer searches a set of directories to find an executable program that matches that name.</li>
+<li class="fragment">This set of directories is called your <code>$PATH</code>. The $ indicates that this is a shell variable. You might have encountered it if you ever wrote a <code>for</code> loop in bash for example.</li>
+</ul>
+<div class="fragment">
+<pre><code>#| eval: false
+echo $PATH
+
+/Users/eric/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/lib:/usr/X11R6/bin:/usr/X11R6/lib:/usr/X11R6/include/X11:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib:/usr/local/squid/bin:/Users/edc5240/bin:.</code></pre>
+</div>
+</section>
+<section id="path" class="slide level2 smaller">
+<h2>$PATH</h2>
+<ul>
+<li class="fragment">So <code>$PATH</code> is an environmental variable that is actually a list of paths.</li>
+<li class="fragment">As far as I know, most bash programs live in <code>/bin</code> and <code>/usr/bin</code></li>
+<li class="fragment">User installed programs traditionally (as far as I know) have lived in <code>/usr/local/bin</code></li>
+<li class="fragment">Nowadays I am seeing package managers use the <code>/opt</code> directory to install things</li>
+<li class="fragment">If you have installed something into a directory that isn’t on the <code>$PATH</code>, then you have two options:
+<ul>
+<li class="fragment">add it to the <code>$PATH</code>.
+<ul>
+<li class="fragment">You can either manually edit the <code>.bashrc</code> or <code>.bash_profile</code></li>
+<li class="fragment">Or (safer, but temporary) <code>export PATH=$PATH:/new/dir/path/</code></li>
+</ul></li>
+<li class="fragment">OR (even safer) you can just call it from that directory whenever you need it
+<ul>
+<li class="fragment"><code>/new/dir/path/mycoolprogram</code></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="your-environment" class="slide level2 smaller">
+<h2>Your Environment</h2>
+<p>So your bash “environment” can be thought of as all of the programs that you can call from the command line, plus all of the environmental variables. Also, remember that you have an environment in a programming language as well. The “environment” tab in R will show you all of the data objects and function that can be called.</p>
+<p><code>$PATH</code> is just one of many environmental variables, which you can use to customize your bash experience. Clearly <code>$PATH</code> is the most important one, because it helps define the group of commands that you have at your disposal. You can get a readout of your bash environment with the <code>env</code> command.Here is the environment on my laptop:</p>
+<pre><code>TERM_PROGRAM=Apple_Terminal
+SHELL=/bin/zsh
+TERM=xterm-256color
+TMPDIR=/var/folders/yy/f3rgkkfj1c1_l1xpt3mdq9txvsrg1y/T/
+TERM_PROGRAM_VERSION=445
+TERM_SESSION_ID=01B23EAE-3E60-4B7C-8473-96E4FCA3F6EF
+USER=edc5240
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.jhqkA98xz4/Listeners
+PATH=/Users/eric/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/lib:/usr/X11R6/bin:/usr/X11R6/lib:/usr/X11R6/include/X11:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib:/usr/local/squid/bin:/Users/edc5240/bin:.
+__CFBundleIdentifier=com.apple.Terminal
+PWD=/Users/edc5240/github/reproducible_research
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+SHLVL=1
+HOME=/Users/edc5240
+LOGNAME=edc5240
+DISPLAY=/private/tmp/com.apple.launchd.YDjzyMZw98/org.xquartz:0
+OLDPWD=/Users/edc5240/github/reproducible_research
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_REPOSITORY=/opt/homebrew
+MANPATH=/opt/homebrew/share/man::
+INFOPATH=/opt/homebrew/share/info:
+ZSH=/Users/edc5240/.oh-my-zsh
+PAGER=less
+LESS=-R
+LSCOLORS=Gxfxcxdxbxegedabagacad
+EDITOR=bbedit
+LANG=en_US.UTF-8
+_=/usr/bin/env</code></pre>
+</section></section>
+<section>
+<section id="installing-software" class="title-slide slide level1 center">
+<h1>Installing Software</h1>
+
+</section>
+<section id="interpreted-languages" class="slide level2 smaller">
+<h2>Interpreted Languages</h2>
+<p>R and Python are interpreted languages. That means can be executed directly from a command line interface, which interprets each command via a virtual machine into machine code. The languages are generally more “user-friendly” and allow mere mortals like biologists to write scripts and get things done. However, interpreted languages are relatively slow compared to compiled languages (but they’ve always been fast enough for my purposes!)</p>
+
+<img data-src="https://media.geeksforgeeks.org/wp-content/uploads/20200326222734/int2.png" class="r-stretch quarto-figure-center"><p class="caption">From geeksforgeeks.org</p></section>
+<section id="compiled-languages" class="slide level2 smaller">
+<h2>Compiled Languages</h2>
+<p>Compiled languages cannot be run directly from a command line. They must first be translated into machine code via a compiler. This, and their syntax, makes them fairly unfriendly for non-programmers. However, since their code is “closer” to machine code, they run much more efficiently. Compiled languages include C, C++, FORTRAN, COBOL, LISP.</p>
+
+<img data-src="https://media.geeksforgeeks.org/wp-content/uploads/20200326222732/com4.png" class="r-stretch quarto-figure-center"><p class="caption">From geeksforgeeks.org</p></section>
+<section id="dependencies" class="slide level2 smaller">
+<h2>Dependencies</h2>
+<p>All software (both compiled and interpreted) is built using other software. If I write code to built an interface for GEODE, I’m not going to write a function that will calculate a Hardy-Weinberg test, and <span class="math inline">\(F_{is}\)</span> and <span class="math inline">\(F_{st}\)</span>, etc.. I am going to use a function that is included in the <code>snpR</code> package for R. So my code will have <code>snpR</code> as a <em>dependency</em>. Similarly, <code>snpR</code> has many dependencies, including <code>dplyr</code>, <code>purrr</code> and <code>ggplot2</code>. And each of those packages have dependencies. Some R packages are built on compiled C++ programs (which run faster), and to install those, you will need to have a C++ compiler like <code>clang</code></p>
+<p>Here’s an <a href="https://www.tidyverse.org/blog/2019/05/itdepends/">interesting post</a> about dependencies from Rstudio.</p>
+</section>
+<section id="compiling-software" class="slide level2 smaller">
+<h2>Compiling Software</h2>
+<p>It is becoming pretty rare, but one day you may have to compile a piece of software. Compilation is a complex process as each program likely has numerous dependencies. There is a common set of steps, but specific instructions can vary, so after you download the software, make sure to carefully read any <code>readme</code> files, and install dependencies beforehand. After downloading the source code with <code>curl</code> or <code>wget</code>, the basic steps are:</p>
+<ul>
+<li class="fragment"><code>./configure</code>: this command checks your environment to ensure all dependencies are in place, and builds something called a Makefile, .</li>
+<li class="fragment"><code>make</code>: this runs the Makefile, which is a set of instructions to pull all of the pieces from the dependencies into a single executable program.</li>
+<li class="fragment"><code>sudo make install</code>: all this does is copy the program into a directory that is on your <code>$PATH</code>. However, because those directories are generally write-protected, you need sudo privileges to do so.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+<p>Every time scientific software is update with bug fixes etc. it will need to be re-installed and if it is compiled language, it will need to be re-compiled!</p>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Compiler_design.svg" class="r-stretch quarto-figure-center"><p class="caption">Compiler workflow by Pronesto</p></section>
+<section id="package-managers" class="slide level2 smaller">
+<h2>Package Managers</h2>
+<p>All this compiling and re-compiling and keeping track of dependencies is exhausting. Fortunately, the nerds find it exhausting too, so they have created package managers! Everyone is familiar with package managers as the “App Stores” you find on your phone or computer. Package managers are programs themselves, that store little sets of instructions for how to compile a wide range of software. They monitor each piece of software for updates, and then can automatically update everything when you command it. All operating systems and programming languages have their own package managers:</p>
+<ul>
+<li class="fragment"><em>MacOS</em>: Officially, the App Store, but unofficially <code>homebrew</code> is the “missing package manager” that builds Linux programs.</li>
+<li class="fragment"><em>Windoze</em>: Windows Package Manager (or <code>winget</code>)</li>
+<li class="fragment"><em>Ubuntu Linux</em> (what our servers use): <code>apt</code></li>
+<li class="fragment"><em>Python</em>: <code>pip</code> or <code>conda</code> or <code>mamba</code></li>
+<li class="fragment"><em>R</em>: <code>install.packages()</code> and the <code>Packages</code> tab in R-Studio is a GUI package manager.</li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section>
+<section id="using-package-managers" class="slide level2 smaller">
+<h2>Using Package Managers</h2>
+<p>Most package managers work pretty similarly. You call the program, then a set of commands within the program. We will use <code>mamba</code> as our main package manager. Please let Raúl and I handle installs for now.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>mamba search myprogram</span>
+<span id="cb3-3"><a href="#cb3-3"></a>mamba install myprogram</span>
+<span id="cb3-4"><a href="#cb3-4"></a>mamba upgrade myprogram</span>
+<span id="cb3-5"><a href="#cb3-5"></a>mamba uninstall myprogram</span>
+<span id="cb3-6"><a href="#cb3-6"></a>mamba info myprogram</span>
+<span id="cb3-7"><a href="#cb3-7"></a>mamba update <span class="co">#check for updates to all packages</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>mamba list <span class="co"># see a list of installed packages</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a>mamba <span class="sc">--</span>help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>So easy!</p>
+
+<img data-src="https://media.tenor.com/c_0cS0-0nZ4AAAAC/revenge-of-the-nerds-nerds.gif" class="r-stretch"></section>
+<section id="conda-and-docker-environments" class="slide level2 smaller">
+<h2>Conda and Docker Environments</h2>
+<p>As software keeps getting built on top of other software, on top of other software, on top of other software, the environment of each user’s computer or computational server keeps getting more difficult to “solve”. Thus, <code>docker</code> was created as a way to create a virtual environment or “container” with all of the necessary dependencies for one particular job. Programmers love docker, but I have never used it.</p>
+<p>Even more recently, the <code>conda</code> package manager for Anaconda, which is a <em>big</em> version of python (clearly these programmers are not bionerds) has also migrated into contained, virtual environments. The <code>qiime2</code> package only works inside a specific conda environment, in fact, and more scientific programs seem to be moving in this direction.</p>
+
+<img data-src="https://i2.wp.com/www.letstakeacloserlook.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-06-at-8.23.55-AM.png" class="r-stretch quarto-figure-center"><p class="caption">Turtles all the way down</p></section></section>
+<section id="workload-managers" class="title-slide slide level1 center">
+<h1>Workload Managers</h1>
+<div class="footer footer-default">
 
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

@@ -1,5 +1,6 @@
 ---
-title: "Linux Shell and Remote "
+title: "Introducing the Linux Bourne-Again Shell (bash)"
+author: "Eric Crandall"
 format: 
   revealjs:
     theme: solarized
@@ -7,9 +8,13 @@ format:
     incremental: true
 
 ---
-# Introducing the Shell
+# Or, how I learned to stop worrying and love the command line {.smaller}
 
-## Background
+
+
+![](https://blog.42mate.com/wp-content/uploads/2017/05/bash-shellshock.png)
+
+# Background
  
 At a high level, computers do four things:
 
@@ -167,7 +172,11 @@ Using Bash or any other shell sometimes *feels* more like programming than like 
  - their output is lines of text rather than something visual like a graph.
  - with great power comes great responsibility
 
+::: {.fragment}
+
  However, Bash is more akin to using an operating system like Windows or MacOS than using a computer language. 
+ 
+:::
 
 
 
@@ -176,8 +185,6 @@ Using Bash or any other shell sometimes *feels* more like programming than like 
 ... with only a few keystrokes, the Bash shell acts as:
 
 -  Glue: combine existing tools into powerful pipelines
-  - through scripts or pipelines 
-  - Powerful and transformative
 
 - Automator: handle large volumes of data automatically, thereby making our work
   - You generally can’t automate actions in Windows or MacOS (of course there are recordable macros but they are unwieldy).
@@ -198,27 +205,164 @@ As we move more and more into cloud computing for scientific analysis of "big da
 
 ![“Unix is user-friendly. It's just very selective about who its friends are.”](images/scripting_cartoon.png)
 
-# Environments and Environmental Variables
-
-## $PATH
-
-For something like PATH where you really do not want to overwrite what values are already stored, you can append values with
-export PATH=$PATH:/new/dir/path/
-
-In lists of values, the colon (:) is used as the delimiter. The dollar sign ($) is used to reference variables, so that export command essentially appends the new directory to the list of existing directories searched for executables. It is possible to prepend as well, which may come in handy if you compile a different version of an existing command.
-
-## $HOME
-
-## /bashrc and bash_profile
+# Environments and Environmental Variables 
 
 
-## docker and conda environments
+## Environmental Variables {.smaller}
+
+So we've visualized the shell as commands that communicate with the cpu through the kernel. But, what actually happens when you type a command, like `ls` into your terminal? How does the computer know what to do with it?
+
+ - Whenever you type a command, your computer searches a set of directories to find an executable program that matches that name. 
+ - This set of directories is called your `$PATH`. The $ indicates that this is a shell variable. You might have encountered it if you ever wrote a `for` loop in bash for example.
+
+::: {.fragment}
+
+```{}
+#| eval: false
+echo $PATH
+
+/Users/eric/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/lib:/usr/X11R6/bin:/usr/X11R6/lib:/usr/X11R6/include/X11:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib:/usr/local/squid/bin:/Users/edc5240/bin:.
+```
+
+:::
+
+## $PATH {.smaller}
+  
+  - So `$PATH` is an environmental variable that is actually a list of paths.
+  - As far as I know, most bash programs live in `/bin` and `/usr/bin`
+  - User installed programs traditionally (as far as I know) have lived in `/usr/local/bin`
+  - Nowadays I am seeing package managers use the `/opt` directory to install things
+  - If you have installed something into a directory that isn't on the `$PATH`, then you have two options:
+    - add it to the `$PATH`. 
+      - You can either manually edit the `.bashrc` or `.bash_profile`
+      - Or (safer, but temporary) `export PATH=$PATH:/new/dir/path/`
+    - OR (even safer) you can just call it from that directory whenever you need it
+      - `/new/dir/path/mycoolprogram`
 
 
-# Package Managers
+## Your Environment {.smaller}
 
+So your bash "environment" can be thought of as all of the programs that you can call from the command line, plus all of the environmental variables. Also, remember that you have an environment in a programming language as well. The "environment" tab in R will show you all of the data objects and function that can be called.
+
+`$PATH` is just one of many environmental variables, which you can use to customize your bash experience.  Clearly `$PATH` is the most important one, because it helps define the group of commands that you have at your disposal. You can get a readout of your bash environment with the `env` command.Here is the environment on my laptop:
+
+```{}
+TERM_PROGRAM=Apple_Terminal
+SHELL=/bin/zsh
+TERM=xterm-256color
+TMPDIR=/var/folders/yy/f3rgkkfj1c1_l1xpt3mdq9txvsrg1y/T/
+TERM_PROGRAM_VERSION=445
+TERM_SESSION_ID=01B23EAE-3E60-4B7C-8473-96E4FCA3F6EF
+USER=edc5240
+SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.jhqkA98xz4/Listeners
+PATH=/Users/eric/opt/anaconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/lib:/usr/X11R6/bin:/usr/X11R6/lib:/usr/X11R6/include/X11:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/lib:/usr/local/squid/bin:/Users/edc5240/bin:.
+__CFBundleIdentifier=com.apple.Terminal
+PWD=/Users/edc5240/github/reproducible_research
+XPC_FLAGS=0x0
+XPC_SERVICE_NAME=0
+SHLVL=1
+HOME=/Users/edc5240
+LOGNAME=edc5240
+DISPLAY=/private/tmp/com.apple.launchd.YDjzyMZw98/org.xquartz:0
+OLDPWD=/Users/edc5240/github/reproducible_research
+HOMEBREW_PREFIX=/opt/homebrew
+HOMEBREW_CELLAR=/opt/homebrew/Cellar
+HOMEBREW_REPOSITORY=/opt/homebrew
+MANPATH=/opt/homebrew/share/man::
+INFOPATH=/opt/homebrew/share/info:
+ZSH=/Users/edc5240/.oh-my-zsh
+PAGER=less
+LESS=-R
+LSCOLORS=Gxfxcxdxbxegedabagacad
+EDITOR=bbedit
+LANG=en_US.UTF-8
+_=/usr/bin/env
+```
+
+# Installing Software
+
+## Interpreted Languages {.smaller}
+
+R and Python are interpreted languages. That means can be executed directly from a command line interface, which interprets each command via a virtual machine into machine code. The languages are generally more "user-friendly" and allow mere mortals like biologists to write scripts and get things done. However, interpreted languages are relatively slow compared to compiled languages (but they've always been fast enough for my purposes!)
+
+![From geeksforgeeks.org](https://media.geeksforgeeks.org/wp-content/uploads/20200326222734/int2.png)
+
+## Compiled Languages {.smaller}
+
+Compiled languages cannot be run directly from a command line. They must first be translated into machine code via a compiler. This, and their syntax, makes them fairly unfriendly for non-programmers. However, since their code is "closer" to machine code, they run much more efficiently. Compiled languages include C, C++, FORTRAN, COBOL, LISP. 
+
+![From geeksforgeeks.org](https://media.geeksforgeeks.org/wp-content/uploads/20200326222732/com4.png)
+
+## Dependencies {.smaller}
+
+All software (both compiled and interpreted) is built using other software. If I write code to built an interface for GEODE, I'm not going to write a function that will calculate a Hardy-Weinberg test, and $F_{is}$ and $F_{st}$, etc.. I am going to use a function that is included in the `snpR` package for R. So my code will have `snpR` as a *dependency*. Similarly, `snpR` has many dependencies, including `dplyr`, `purrr` and `ggplot2`. And each of those packages have dependencies. Some R packages are built on compiled C++ programs (which run faster), and to install those, you will need to have a C++ compiler like `clang`
+
+Here's an [interesting post](https://www.tidyverse.org/blog/2019/05/itdepends/) about dependencies from Rstudio.
+
+
+## Compiling Software {.smaller}
+
+It is becoming pretty rare, but one day you may have to compile a piece of software. Compilation is a complex process as each program likely has numerous dependencies. There is a common set of steps, but specific instructions can vary, so after you download the software, make sure to carefully read any `readme` files, and install dependencies beforehand. After downloading the source code with `curl` or `wget`, the basic steps are:
+
+  - `./configure`: this command checks your environment to ensure all dependencies are in place, and builds something called a Makefile, .
+  - `make`: this runs the Makefile, which is a set of instructions to pull all of the pieces from the dependencies into a single executable program.
+  - `sudo make install`: all this does is copy the program into a directory that is on your `$PATH`. However, because those directories are generally write-protected, you need sudo privileges to do so.
+  
+
+
+---
+
+Every time scientific software is update with bug fixes etc. it will need to be re-installed and if it is compiled language, it will need to be re-compiled!
+
+![Compiler workflow by Pronesto](https://upload.wikimedia.org/wikipedia/commons/c/cc/Compiler_design.svg)
+
+## Package Managers {.smaller}
+
+All this compiling and re-compiling and keeping track of dependencies is exhausting. Fortunately, the nerds find it exhausting too, so they have created package managers! Everyone is familiar with package managers as the "App Stores" you find on your phone or computer. Package managers are programs themselves, that store little sets of instructions for how to compile a wide range of software. They monitor each piece of software for updates, and then can automatically update everything when you command it. All operating systems and programming languages have their own package managers:
+
+  - *MacOS*: Officially, the App Store, but unofficially `homebrew` is the "missing package manager" that builds Linux programs.
+  - *Windoze*: Windows Package Manager (or `winget`)
+  - *Ubuntu Linux* (what our servers use): `apt`
+  - *Python*: `pip` or `conda` or `mamba`
+  - *R*: `install.packages()` and  the `Packages` tab in R-Studio is a GUI package manager.
+
+---
+
+
+
+---
+
+## Using Package Managers {.smaller}
+
+Most package managers work pretty similarly. You call the program, then a set of commands within the program. We will use `mamba` as our main package manager. Please let Raúl and I handle installs for now.
+
+```{.r}
+#| eval: false
+mamba search myprogram
+mamba install myprogram
+mamba upgrade myprogram
+mamba uninstall myprogram
+mamba info myprogram
+mamba update #check for updates to all packages
+mamba list # see a list of installed packages
+
+mamba --help
+```
+
+So easy!
+
+![](https://media.tenor.com/c_0cS0-0nZ4AAAAC/revenge-of-the-nerds-nerds.gif)
+
+## Conda and Docker Environments {.smaller}
+
+As software keeps getting built on top of other software, on top of other software, on top of other software, the environment of each user's computer or computational server keeps getting more difficult to "solve". Thus, `docker` was created as a way to create a virtual environment or "container" with all of the necessary dependencies for one particular job. Programmers love docker, but I have never used it.
+
+Even more recently, the `conda` package manager for Anaconda, which is a *big* version of python (clearly these programmers are not bionerds) has also migrated into contained, virtual environments. The `qiime2` package only works inside a specific conda environment, in fact, and more scientific programs seem to be moving in this direction.
+
+![Turtles all the way down](https://i2.wp.com/www.letstakeacloserlook.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-06-at-8.23.55-AM.png)
 
 # Workload Managers
+
 
 
 
