@@ -144,6 +144,19 @@ and in most packages that provide Unix-like tools for Windows.
 
 ![Example File System](images/file_system.png)
 
+## Paths: Absolute vs. Relative
+
+- Absolute Path
+  - specifies the location of a file or directory from the root directory(/)
+  - “208 Mueller Lab, University Park, PA 16802”
+  - /Users/edc5240
+
+ - Relative Path
+  - path related to the present working directory(pwd).
+  - “Take a left on Atherton, take it through downtown State College and past the bus station, right on Curtin, keep left, just past the library, take a right into the parking circle, you'll see a loading dock. Park there. 
+  - ../../usr/lib
+
+
 ## Using Bash {.smaller}
 
 Using Bash or any other shell sometimes *feels* more like programming than like using a mouse:
@@ -184,3 +197,31 @@ Using Bash or any other shell sometimes *feels* more like programming than like 
 As we move more and more into cloud computing for scientific analysis of "big data", we are actually moving away from GUI and back toward CLI!
 
 ![“Unix is user-friendly. It's just very selective about who its friends are.”](images/scripting_cartoon.png)
+
+# Environments and Environmental Variables
+
+## $PATH
+
+For something like PATH where you really do not want to overwrite what values are already stored, you can append values with
+export PATH=$PATH:/new/dir/path/
+
+In lists of values, the colon (:) is used as the delimiter. The dollar sign ($) is used to reference variables, so that export command essentially appends the new directory to the list of existing directories searched for executables. It is possible to prepend as well, which may come in handy if you compile a different version of an existing command.
+
+## $HOME
+
+## /bashrc and bash_profile
+
+
+## docker and conda environments
+
+
+# Package Managers
+
+
+# Workload Managers
+
+
+
+
+
+
