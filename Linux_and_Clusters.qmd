@@ -6,6 +6,7 @@ format:
     theme: solarized
     transition: concave
     incremental: true
+    chalkboard: true
 
 ---
 # Or, how I learned to stop worrying and love the command line {.smaller}
@@ -37,7 +38,7 @@ Although most modern desktop operating systems communicate with their human user
 means of windows, icons and pointers, these software technologies didn't become
 widespread until the 1980s. The roots of such *graphical user interfaces* go back
 to Doug Engelbart's work in the 1960s, which you can see in what has been
-called "[The Mother of All Demos](http://www.youtube.com/watch?v=a11JDLBXtPQ)".
+called "[The Mother of All Demos](https://www.youtube.com/watch?v=yJDv-zdhzMY)".
 
 
 
@@ -149,14 +150,14 @@ and in most packages that provide Unix-like tools for Windows.
 
 ![Example File System](images/file_system.png)
 
-## Paths: Absolute vs. Relative
+## Paths: Absolute vs. Relative {.smaller}
 
 - Absolute Path
   - specifies the location of a file or directory from the root directory(/)
   - “208 Mueller Lab, University Park, PA 16802”
   - /Users/edc5240
 
- - Relative Path
+- Relative Path
   - path related to the present working directory(pwd).
   - “Take a left on Atherton, take it through downtown State College and past the bus station, right on Curtin, keep left, just past the library, take a right into the parking circle, you'll see a loading dock. Park there. 
   - ../../usr/lib
@@ -186,7 +187,7 @@ Using Bash or any other shell sometimes *feels* more like programming than like 
 
 -  Glue: combine existing tools into powerful pipelines
 
-- Automator: handle large volumes of data automatically, thereby making our work
+- Automator: handle large volumes of data automatically, thereby making our work reproducible
   - You generally can’t automate actions in Windows or MacOS (of course there are recordable macros but they are unwieldy).
   - With a shell, once you figure out how to do something, you can set it up and let it run over and over again
 
@@ -195,9 +196,6 @@ Using Bash or any other shell sometimes *feels* more like programming than like 
   - an electronic lab notebook
 
 - Communicator: easily interact with remote servers
-
-
-
 
 ## It is worth your time to learn it! {.smaller}
 
@@ -238,6 +236,7 @@ echo $PATH
       - Or (safer, but temporary) `export PATH=$PATH:/new/dir/path/`
     - OR (even safer) you can just call it from that directory whenever you need it
       - `/new/dir/path/mycoolprogram`
+  - Also, you can find the location of any command by typing `which nameOfCommand`
 
 
 ## Your Environment {.smaller}
@@ -278,6 +277,98 @@ EDITOR=bbedit
 LANG=en_US.UTF-8
 _=/usr/bin/env
 ```
+
+# Working on Remote Servers
+
+While it might be possible to have a GUI interface to a computational server, it would kind of defeat the point. A computational server is for computing. Not no email and word processing.
+
+There's really only three extra commands you need to know to use a computational server.
+
+## Login to Remote Server
+
+  - `ssh` for "secure shell" allows one to login to the server
+  
+::: {.fragment}
+  
+```{.bash}
+#| eval: false
+
+ssh edc5240@argonaute.science.psu.edu
+
+password: YOURPSUPASSWORD
+  
+```
+
+:::
+
+  - after you login, remember you are in a new shell with a new environment and different programs. 
+
+## Copy Files to/from Remote Server
+
+  - `scp` for "secure copy" allows one to copy files to and from the server. It uses the same syntax as `cp`: the first argument is the path to the file or directory that needs copying. The second argument is the path to the destination. *Remember to use the `-r` flag for directories!*
+  
+::: {.fragment}
+  
+```{.bash}
+#| eval: false
+# copy a directory up
+scp -r ~/data/OrbicellaGenome edc5240@argonaute.science.psu.edu:./data/OrbicellaGenome
+password: YOURPSUPASSWORD
+# copy a file down
+scp edc5240@argonaute.science.psu.edu:./data/Ofav_Varadero.1.fastq ~/data/OrbicellaData/Ofav_Varadero.1.fastq
+password: YOURPSUPASSWORD
+```
+
+:::
+
+## Shortening your login
+
+Feeling bold? You could edit your ssh config file (only do this *after* your first ssh login)
+
+```{.bash}
+#| eval: false
+nano ~/.ssh/config
+# paste this in and save
+Host argo
+    HostName argonaute.science.psu.edu
+    User edc5240
+
+Host naut
+    HostName nautilus.psu.edu
+    User ecrandall
+    
+Host mont
+    HostName montastraea.psu.edu
+    User ecrandall
+
+
+```
+
+Thereafter, if you type `ssh argo` it will autofill the rest of the information.
+
+
+## Setting up Terminal Multiplexers {.smaller}
+
+Gah, more nerdy terms. Basically, when you `ssh` into a server, any processes that you start there will stop as soon as you logout. You therefore need to start a terminal that isn't going to die when you logout. You do this with a terminal multiplexer.
+
+I have always used `screen` as my terminal multiplexer, but I understand that `tmux` is the latest thing. [Here](https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/) is a guide to `tmux` that I just read.
+
+```{.bash}
+#| eval: false
+# start a new, named tmux terminal
+tmux new -s myterminal
+```
+
+Once you do this, you are in the new terminal. You can start whatever jobs you want to leave the terminal with processes still running (detach from the terminal), press `Cntl-b` and then press `d` (for detach). To "kill" the terminal and end any processes within, press `Cntl-b` and then press `x`.
+
+If you come back after awhile and want to re-attach to your terminal:
+
+```{.bash}
+#| eval: false
+# start a new, named tmux terminal
+tmux attach-session -t myterminal
+```
+
 
 # Installing Software
 
@@ -362,6 +453,82 @@ Even more recently, the `conda` package manager for Anaconda, which is a *big* v
 ![Turtles all the way down](https://i2.wp.com/www.letstakeacloserlook.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-06-at-8.23.55-AM.png)
 
 # Workload Managers
+
+
+
+## Medina Lab Servers {.smaller}
+
+:::: {.columns}
+
+::: {.column}
+
+*Nautilus*  
+Model: Dell Power Edge R820  
+RAM: 380 Gb  
+ROM: ~37 TB free  
+Cores: 32  
+Location: COLO, Rm 141, Rack AK42  
+
+*Montastraea*  
+Model:  Dell Power Edge R410  
+RAM: 96 Gb  
+ROM: ~ 4 Tb free  
+Cores: 16  
+Location: COLO, Rm 141, Rack AK42  
+Address: montastraea.psu.edu  
+
+:::
+
+::: {.column}
+
+*Argonaute*
+Model: Bishoy Skynet Special  
+RAM: 62 Gb  
+ROM: ~4 Tb free  
+Cores: 12  
+Location: 315 Mueller  
+Address: argonaute.science.psu.edu  
+
+:::
+
+::::
+
+## Network Attached Storage Server {.smaller}
+
+*Cassiopea*
+Model: Synology DS1621+  
+RAM: 4 GB  
+Cores: 4  
+ROM: 72 Tb Total (RAID5 to ~50 Tb)  
+
+To mount the shared drive:  
+*Mac:*  
+- Open Finder and click Go in the top menu bar, then Connect to server.  
+- Enter the following address and then authenticate with Penn State credentials:  
+smb://cassiopea.science.psu.edu/MedinaLab  
+smb://e1-055554.science.psu.edu/MedinaLab
+
+*Windows:*
+- Open a file explorer window and go to This PC.  
+- In the top menu, select Computer then Map a network Drive  
+- Enter this address and authenticate with Penn State credentials:   
+\\cassiopea.science.psu.edu\MedinaLab
+\\e1-055554.science.psu.edu\MedinaLab
+
+## Workload Managers {.smaller}
+
+To manage all of these computing resources, it is helpful to have a workload manager. Workload managers create a queue of jobs, with each job getting resources according to a priority system (usually order of submission, but could be otherwise). There are two workload managers we are currently looking at:
+
+- SLURM: Simple Linux Utility for Resource Management
+- openPBS: open-source version of PBS: Portable Batch System
+
+Both use a basic set of commands to submit jobs to a queue. Jobs need to be written as a basic bash script.
+
+![SLURM](https://slurm.schedmd.com/arch.gif)
+
+
+# Penn State Computational Cluster: ROAR
+
 
 
 

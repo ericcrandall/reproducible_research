@@ -97,6 +97,8 @@
   <link href="Linux_and_Clusters_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
   <link href="Linux_and_Clusters_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -413,7 +415,7 @@
 <section id="section" class="slide level2 smaller">
 <h2></h2>
 <p>They can do the last of these in many different ways, including direct brain-computer interfaces and speech recognition, using systems such as Alexa or Google Home. While such hardware interfaces are becoming more commonplace, most interaction is still done using screens, mice, touchpads and keyboards.</p>
-<p>Although most modern desktop operating systems communicate with their human users by means of windows, icons and pointers, these software technologies didn’t become widespread until the 1980s. The roots of such <em>graphical user interfaces</em> go back to Doug Engelbart’s work in the 1960s, which you can see in what has been called “<a href="http://www.youtube.com/watch?v=a11JDLBXtPQ">The Mother of All Demos</a>”.</p>
+<p>Although most modern desktop operating systems communicate with their human users by means of windows, icons and pointers, these software technologies didn’t become widespread until the 1980s. The roots of such <em>graphical user interfaces</em> go back to Doug Engelbart’s work in the 1960s, which you can see in what has been called “<a href="https://www.youtube.com/watch?v=yJDv-zdhzMY">The Mother of All Demos</a>”.</p>
 </section>
 <section id="the-command-line-interface" class="slide level2 smaller">
 <h2>The Command-Line Interface</h2>
@@ -503,7 +505,7 @@
 <h2>Heirarchical File System</h2>
 
 <img data-src="images/file_system.png" class="r-stretch quarto-figure-center"><p class="caption">Example File System</p></section>
-<section id="paths-absolute-vs.-relative" class="slide level2">
+<section id="paths-absolute-vs.-relative" class="slide level2 smaller">
 <h2>Paths: Absolute vs.&nbsp;Relative</h2>
 <ul>
 <li class="fragment">Absolute Path
@@ -512,10 +514,12 @@
 <li class="fragment">“208 Mueller Lab, University Park, PA 16802”</li>
 <li class="fragment">/Users/edc5240</li>
 </ul></li>
-<li class="fragment">Relative Path</li>
+<li class="fragment">Relative Path
+<ul>
 <li class="fragment">path related to the present working directory(pwd).</li>
 <li class="fragment">“Take a left on Atherton, take it through downtown State College and past the bus station, right on Curtin, keep left, just past the library, take a right into the parking circle, you’ll see a loading dock. Park there.</li>
 <li class="fragment">../../usr/lib</li>
+</ul></li>
 </ul>
 </section>
 <section id="using-bash" class="slide level2 smaller">
@@ -537,7 +541,7 @@
 <p>… with only a few keystrokes, the Bash shell acts as:</p>
 <ul>
 <li class="fragment"><p>Glue: combine existing tools into powerful pipelines</p></li>
-<li class="fragment"><p>Automator: handle large volumes of data automatically, thereby making our work</p>
+<li class="fragment"><p>Automator: handle large volumes of data automatically, thereby making our work reproducible</p>
 <ul>
 <li class="fragment">You generally can’t automate actions in Windows or MacOS (of course there are recordable macros but they are unwieldy).</li>
 <li class="fragment">With a shell, once you figure out how to do something, you can set it up and let it run over and over again</li>
@@ -593,6 +597,7 @@ echo $PATH
 <li class="fragment"><code>/new/dir/path/mycoolprogram</code></li>
 </ul></li>
 </ul></li>
+<li class="fragment">Also, you can find the location of any command by typing <code>which nameOfCommand</code></li>
 </ul>
 </section>
 <section id="your-environment" class="slide level2 smaller">
@@ -629,6 +634,77 @@ LSCOLORS=Gxfxcxdxbxegedabagacad
 EDITOR=bbedit
 LANG=en_US.UTF-8
 _=/usr/bin/env</code></pre>
+</section></section>
+<section>
+<section id="working-on-remote-servers" class="title-slide slide level1 center">
+<h1>Working on Remote Servers</h1>
+<p>While it might be possible to have a GUI interface to a computational server, it would kind of defeat the point. A computational server is for computing. Not no email and word processing.</p>
+<p>There’s really only three extra commands you need to know to use a computational server.</p>
+</section>
+<section id="login-to-remote-server" class="slide level2">
+<h2>Login to Remote Server</h2>
+<ul>
+<li class="fragment"><code>ssh</code> for “secure shell” allows one to login to the server</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">ssh</span> edc5240@argonaute.science.psu.edu</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="ex">password:</span> YOURPSUPASSWORD</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">after you login, remember you are in a new shell with a new environment and different programs.</li>
+</ul>
+</section>
+<section id="copy-files-tofrom-remote-server" class="slide level2">
+<h2>Copy Files to/from Remote Server</h2>
+<ul>
+<li class="fragment"><code>scp</code> for “secure copy” allows one to copy files to and from the server. It uses the same syntax as <code>cp</code>: the first argument is the path to the file or directory that needs copying. The second argument is the path to the destination. <em>Remember to use the <code>-r</code> flag for directories!</em></li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># copy a directory up</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="fu">scp</span> <span class="at">-r</span> ~/data/OrbicellaGenome edc5240@argonaute.science.psu.edu:./data/OrbicellaGenome</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="ex">password:</span> YOURPSUPASSWORD</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># copy a file down</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="fu">scp</span> edc5240@argonaute.science.psu.edu:./data/Ofav_Varadero.1.fastq ~/data/OrbicellaData/Ofav_Varadero.1.fastq</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="ex">password:</span> YOURPSUPASSWORD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="shortening-your-login" class="slide level2">
+<h2>Shortening your login</h2>
+<p>Feeling bold? You could edit your ssh config file (only do this <em>after</em> your first ssh login)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">nano</span> ~/.ssh/config</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># paste this in and save</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="ex">Host</span> argo</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="ex">HostName</span> argonaute.science.psu.edu</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="ex">User</span> edc5240</span>
+<span id="cb5-7"><a href="#cb5-7"></a></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="ex">Host</span> naut</span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="ex">HostName</span> nautilus.psu.edu</span>
+<span id="cb5-10"><a href="#cb5-10"></a>    <span class="ex">User</span> ecrandall</span>
+<span id="cb5-11"><a href="#cb5-11"></a>    </span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="ex">Host</span> mont</span>
+<span id="cb5-13"><a href="#cb5-13"></a>    <span class="ex">HostName</span> montastraea.psu.edu</span>
+<span id="cb5-14"><a href="#cb5-14"></a>    <span class="ex">User</span> ecrandall</span>
+<span id="cb5-15"><a href="#cb5-15"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Thereafter, if you type <code>ssh argo</code> it will autofill the rest of the information.</p>
+</section>
+<section id="setting-up-terminal-multiplexers" class="slide level2 smaller">
+<h2>Setting up Terminal Multiplexers</h2>
+<p>Gah, more nerdy terms. Basically, when you <code>ssh</code> into a server, any processes that you start there will stop as soon as you logout. You therefore need to start a terminal that isn’t going to die when you logout. You do this with a terminal multiplexer.</p>
+<p>I have always used <code>screen</code> as my terminal multiplexer, but I understand that <code>tmux</code> is the latest thing. <a href="https://www.howtogeek.com/671422/how-to-use-tmux-on-linux-and-why-its-better-than-screen/">Here</a> is a guide to <code>tmux</code> that I just read.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># start a new, named tmux terminal</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="ex">tmux</span> new <span class="at">-s</span> myterminal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you do this, you are in the new terminal. You can start whatever jobs you want to leave the terminal with processes still running (detach from the terminal), press <code>Cntl-b</code> and then press <code>d</code> (for detach). To “kill” the terminal and end any processes within, press <code>Cntl-b</code> and then press <code>x</code>.</p>
+<p>If you come back after awhile and want to re-attach to your terminal:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># start a new, named tmux terminal</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="ex">tmux</span> attach-session <span class="at">-t</span> myterminal</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section>
 <section id="installing-software" class="title-slide slide level1 center">
@@ -681,16 +757,16 @@ _=/usr/bin/env</code></pre>
 <section id="using-package-managers" class="slide level2 smaller">
 <h2>Using Package Managers</h2>
 <p>Most package managers work pretty similarly. You call the program, then a set of commands within the program. We will use <code>mamba</code> as our main package manager. Please let Raúl and I handle installs for now.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>mamba search myprogram</span>
-<span id="cb3-3"><a href="#cb3-3"></a>mamba install myprogram</span>
-<span id="cb3-4"><a href="#cb3-4"></a>mamba upgrade myprogram</span>
-<span id="cb3-5"><a href="#cb3-5"></a>mamba uninstall myprogram</span>
-<span id="cb3-6"><a href="#cb3-6"></a>mamba info myprogram</span>
-<span id="cb3-7"><a href="#cb3-7"></a>mamba update <span class="co">#check for updates to all packages</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>mamba list <span class="co"># see a list of installed packages</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a>mamba <span class="sc">--</span>help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>mamba search myprogram</span>
+<span id="cb8-3"><a href="#cb8-3"></a>mamba install myprogram</span>
+<span id="cb8-4"><a href="#cb8-4"></a>mamba upgrade myprogram</span>
+<span id="cb8-5"><a href="#cb8-5"></a>mamba uninstall myprogram</span>
+<span id="cb8-6"><a href="#cb8-6"></a>mamba info myprogram</span>
+<span id="cb8-7"><a href="#cb8-7"></a>mamba update <span class="co">#check for updates to all packages</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>mamba list <span class="co"># see a list of installed packages</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a>mamba <span class="sc">--</span>help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So easy!</p>
 
 <img data-src="https://media.tenor.com/c_0cS0-0nZ4AAAAC/revenge-of-the-nerds-nerds.gif" class="r-stretch"></section>
@@ -700,8 +776,67 @@ _=/usr/bin/env</code></pre>
 <p>Even more recently, the <code>conda</code> package manager for Anaconda, which is a <em>big</em> version of python (clearly these programmers are not bionerds) has also migrated into contained, virtual environments. The <code>qiime2</code> package only works inside a specific conda environment, in fact, and more scientific programs seem to be moving in this direction.</p>
 
 <img data-src="https://i2.wp.com/www.letstakeacloserlook.com/wp-content/uploads/2020/04/Screen-Shot-2020-04-06-at-8.23.55-AM.png" class="r-stretch quarto-figure-center"><p class="caption">Turtles all the way down</p></section></section>
+<section>
 <section id="workload-managers" class="title-slide slide level1 center">
 <h1>Workload Managers</h1>
+
+</section>
+<section id="medina-lab-servers" class="slide level2 smaller">
+<h2>Medina Lab Servers</h2>
+<div class="columns">
+<div class="column">
+<p><em>Nautilus</em><br>
+Model: Dell Power Edge R820<br>
+RAM: 380 Gb<br>
+ROM: ~37 TB free<br>
+Cores: 32<br>
+Location: COLO, Rm 141, Rack AK42</p>
+<p><em>Montastraea</em><br>
+Model: Dell Power Edge R410<br>
+RAM: 96 Gb<br>
+ROM: ~ 4 Tb free<br>
+Cores: 16<br>
+Location: COLO, Rm 141, Rack AK42<br>
+Address: montastraea.psu.edu</p>
+</div><div class="column">
+<p><em>Argonaute</em> Model: Bishoy Skynet Special<br>
+RAM: 62 Gb<br>
+ROM: ~4 Tb free<br>
+Cores: 12<br>
+Location: 315 Mueller<br>
+Address: argonaute.science.psu.edu</p>
+</div>
+</div>
+</section>
+<section id="network-attached-storage-server" class="slide level2 smaller">
+<h2>Network Attached Storage Server</h2>
+<p><em>Cassiopea</em> Model: Synology DS1621+<br>
+RAM: 4 GB<br>
+Cores: 4<br>
+ROM: 72 Tb Total (RAID5 to ~50 Tb)</p>
+<p>To mount the shared drive:<br>
+<em>Mac:</em><br>
+- Open Finder and click Go in the top menu bar, then Connect to server.<br>
+- Enter the following address and then authenticate with Penn State credentials:<br>
+smb://cassiopea.science.psu.edu/MedinaLab<br>
+smb://e1-055554.science.psu.edu/MedinaLab</p>
+<p><em>Windows:</em> - Open a file explorer window and go to This PC.<br>
+- In the top menu, select Computer then Map a network Drive<br>
+- Enter this address and authenticate with Penn State credentials:<br>
+\cassiopea.science.psu.edu \e1-055554.science.psu.edu</p>
+</section>
+<section id="workload-managers-1" class="slide level2 smaller">
+<h2>Workload Managers</h2>
+<p>To manage all of these computing resources, it is helpful to have a workload manager. Workload managers create a queue of jobs, with each job getting resources according to a priority system (usually order of submission, but could be otherwise). There are two workload managers we are currently looking at:</p>
+<ul>
+<li class="fragment">SLURM: Simple Linux Utility for Resource Management</li>
+<li class="fragment">openPBS: open-source version of PBS: Portable Batch System</li>
+</ul>
+<p>Both use a basic set of commands to submit jobs to a queue. Jobs need to be written as a basic bash script.</p>
+
+<img data-src="https://slurm.schedmd.com/arch.gif" class="r-stretch quarto-figure-center"><p class="caption">SLURM</p></section></section>
+<section id="penn-state-computational-cluster-roar" class="title-slide slide level1 center">
+<h1>Penn State Computational Cluster: ROAR</h1>
 <div class="footer footer-default">
 
 </div>
@@ -716,6 +851,7 @@ _=/usr/bin/env</code></pre>
   <script src="Linux_and_Clusters_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Linux_and_Clusters_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
   <script src="Linux_and_Clusters_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -737,7 +873,8 @@ _=/usr/bin/env</code></pre>
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -908,7 +1045,7 @@ _=/usr/bin/env</code></pre>
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
 
           RevealMath,
           RevealNotes,
