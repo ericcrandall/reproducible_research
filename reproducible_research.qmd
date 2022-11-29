@@ -417,7 +417,8 @@ low-end users (like us), but charge for services needed by power users
 
 Also, please note, while github can store data files up to 100 MB, it is not
 meant to be a repository for data! Consider keeping raw data files on a RAIDed
-(backed up) server (like Cassiopea!)
+(backed up) server (like Cassiopea!). You can also put big files in your 
+.gitignore file so that they aren't transferred to github.
 
 # GitHub Tutorial
 
@@ -518,6 +519,12 @@ git commit -m "my commit message"
 
 ```
 
+## A commit analogy
+
+> Using a Git commit is like using anchors and other protection when climbing. If you’re crossing a dangerous rock face you want to make sure you’ve used protection to catch you if you fall. Commits play a similar role: if you make a mistake, you can’t fall past the previous commit. Coding without commits is like free-climbing: you can travel much faster in the short-term, but in the long-term the chances of catastrophic failure are high! Like rock climbing protection, you want to be judicious in your use of commits. Committing too frequently will slow your progress; use more commits when you’re in uncertain or dangerous territory. Commits are also helpful to others, because they show your journey, not just the destination.
+
+--Hadley Wickham (PBUH), 2015
+
 ## The History window
 
 -   Easy inspection of past commits.
@@ -529,6 +536,8 @@ git commit -m "my commit message"
 #| echo: true
 git log
 ```
+
+![RStudio Git Interface](images/rstudio_git.png)
 
 ## How does git store and keep track of things
 
