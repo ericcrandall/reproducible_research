@@ -100,17 +100,17 @@ discriminant analysis published between 1991 and 2011: received only
 # Tools for Research Reproducibility {.smaller}
 
 -   Open Source Everything
--   R language
--   Rstudio and knitR
--   Markdown and LaTeX
 -   Unix operating system
 -   GitHub and git - version control
+-   Markdown and LaTeX
+-   R language
+-   Rstudio, knitR, Quarto
 -   Creative Commons Licensing
 -   [Online
     Repositories](http://oad.simmons.edu/oadwiki/Data_repositories)
     (Dryad, Genbank,GBIF, GEOME, new ones all the time)
     
-Good habits to get into as a student!
+Get started with these as a grad student/postdoc!
 
 ## Stop Using Excel! {.smaller}
 
@@ -227,12 +227,15 @@ neatly-contained packages of work (typically data and code) called
 - Nothing mysterious about these---just collections of files
 stored together in a single directory on your computer.
 
-# Git and GitHub
+# Git and GitHub {.smaller}
 
 -   Thanks to [Eric Anderson](https://eriqande.netlify.app) for portions
     of the git/github part of this lecture 
     
     ![Eric Anderson](images/Eric-Anderson-60.jpg)
+-   Thanks to [Happy Git and Github for the useR](https://happygitwithr.com) by Jennifer Bryan for other portions!
+    
+    ![Watch Me Diff](https://happygitwithr.com/img/watch-me-diff-watch-me-rebase-smaller.png)
 
 ## Git {.smaller}
 
