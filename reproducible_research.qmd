@@ -1,0 +1,608 @@
+---
+title: "Tools for Reproducible Research"
+author: "Eric Crandall"
+format: 
+  revealjs:
+    theme: solarized
+    transition: concave
+    incremental: true
+---
+
+# What is Reproducibility? {.smaller}
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
+gives this definition (especially for data analysis and computer
+science):
+
+> "The data and code used to make a finding are available and they are
+> presented in such a way that it is (relatively) straightforward for an
+> independent researcher to recreate the finding."
+
+![GandrudFigure2.1](images/Gandrud_Figure21.png)
+
+## This actually seldom happens. {.smaller}
+
+Consider two interesting articles by Tim Vines:  
+
+1. [The Availability of
+Research Data Declines Rapidly with Article
+Age](http://www.sciencedirect.com/science/article/pii/S0960982213014000)
+
+Contacted Authors of 516 datasets with morphological data for
+discriminant analysis published between 1991 and 2011: received only
+101 datasets!
+
+"*of 516 articles published between 2 and 22 years ago...the odds of
+    a data set being extant fell by 17% per year.*"
+
+
+![Vines et al. 2014: Figure1](images/Vines2014_1.png)
+
+## Same thing happens for genomic metadata 
+
+![Crandall et al. in review: Figure 4](images/Figure4_LogisticModels.jpg)
+
+## Data not only need to be easily available, but methods also need to be reproducible {.smaller}
+
+-   Gilbert et al. 2012 - [Recommendations for utilizing and reporting
+    population genetic analyses: the reproducibility of genetic
+    clustering using the program
+    structure](http://onlinelibrary.wiley.com/doi/10.1111/j.1365-294X.2012.05754.x/full)
+
+    -   "*we reanalysed data sets gathered from papers using the
+        software package 'structure'... 30% of analyses were unable to
+        reproduce the same number of population clusters.*"
+
+-   Scientific articles have fairly detailed methods sections, but **those
+    are typically insufficient to actually reproduce an analysis**.
+
+-   Scientists owe it to themselves and their community to have an
+    explicit record of all the steps in an analysis done at a computer.
+
+# Why are Open Data and Reproducibility Important?
+
+## For Science? {.smaller}
+
+-   Standard to judge scientific claims
+-   Data and methods need to be openly available in order to be
+    reproducible
+-   Avoiding effort duplication
+-   Encouraging cumulative knowledge development
+
+![Sea of Doubts](images/sea_of_doubts.jpg)
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
+
+## Open Science
+
+[Open Science Links](http://en.wikipedia.org/wiki/Open_science)
+
+-   Open Data
+-   Reproducible Methods
+-   Open Access Publications
+
+![Big Data](images/bigdata_nielsen_nature.png)
+
+## Why are Open Data and Reproducibility Important for *You*?
+
+-   Better work habits
+
+    -   better, clearer documentation
+
+-   Better teamwork
+
+-   Re-analysis is easier
+
+-   Higher research impact
+
+[Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
+
+# Tools for Research Reproducibility {.smaller}
+
+-   Open Source Everything
+-   R language
+-   Rstudio and knitR
+-   Markdown and LaTeX
+-   Unix operating system
+-   GitHub and git - version control
+-   Creative Commons Licensing
+-   [Online
+    Repositories](http://oad.simmons.edu/oadwiki/Data_repositories)
+    (Dryad, Genbank,GBIF, GEOME, new ones all the time)
+    
+Good habits to get into as a student!
+
+## Stop Using Excel! {.smaller}
+
+-   OK, maybe not entirely - its good for quick visualizing, data entry,
+    etc.
+
+-   It tends to be a crutch.
+
+    -   Stops you from thinking carefully about your data structure
+    -   Stops you from learning better ways to handle data
+
+-   Proprietary software
+
+-   Easy to mess up your data, no provenance
+
+-   [Dates!](http://support.microsoft.com/kb/214330)
+
+-   At least keep your raw data in text format
+
+## Learn to Code
+
+Any language.
+
+R is a great starting place for scientists.
+
+Here is code to paste cells from excel into an R data frame!
+
+```{r}
+#| eval: false
+#| echo: true
+# tidyverse way
+data <- read_delim(clipboard())
+
+#base R way
+data <- read.table(pipe("pbpaste"),header=T) 
+
+```
+
+
+## Make a plan for managing data in each project {.smaller}
+
+-   Keep all data (and ideally analyses) in a text file
+-   Think about your file structure
+
+
+![Gandrud Figure 1](images/gandrud_1.png) 
+
+## Make a plan for managing data in each project - 2
+
+-   Document everything
+-   Explicitly tie your files together
+-   **Keep raw data raw!** All changes should be documented in a script.
+-   Data management plans are now explicitly required by the NSF and
+    other funding agencies!!! ![Gandrud Figure 2](images/gandrud_2.png)
+
+## Keep an electronic (online) notebook
+
+-   Document everything!!
+
+    -   repeat your own analysis!!
+    -   show others what you did
+
+-   Dokuwiki is great (keeps things in plain text)
+
+-   I now use GitHub and Quarto notebooks with Rmarkdown
+
+-   [Go open if you're
+    brave](https://ericcrandall.github.io/Palythoa_tuberculosa/)
+
+## Communicate Your Science
+
+Start doing outreach now!
+
+[NSF vs. House Committee on
+Science](http://news.sciencemag.org/policy/2014/10/battle-between-nsf-and-house-science-committee-escalates-how-did-it-get-bad)
+
+![Science Mistrust](images/kqed.jpg)
+
+## Publish Preprints and Open-Access Articles {.smaller}
+
+-   [Biology Failed the
+    Internet](https://www.youtube.com/watch?v=fmeI_X3Ppow)
+
+    -   Physics moved to pre-print servers a long time ago!
+    -   Open access journals (e.g. PLoS) were supposed to be a stop-gap
+        measure!
+
+-   Many schools now have open-access funds
+
+-   [The dark side of
+    open-access](http://www.nytimes.com/2013/04/08/health/for-scientists-an-exploding-world-of-pseudo-academia.html)
+
+-   Most journals only own the "typesetting" (because that is all they
+    did!).
+
+    -   [Therefore you may legally post a
+        pre-print](http://datapub.cdlib.org/2012/11/06/researchers-make-your-previous-work-oa/)
+    -   BiorXiv
+    -   PeerJ
+    -   Most universities now have pre-print platforms
+
+-   ResearchGate, Academia.edu etc. are social networks whereby you are
+    sharing articles with your "friends"
+
+## Rstudio
+
+- R studio is an Integrated Developer Environment (IDE) for R that *sits on top of* R and makes
+it easier to work. 
+
+- Organizes your work in R in
+neatly-contained packages of work (typically data and code) called
+"projects"
+
+- Nothing mysterious about these---just collections of files
+stored together in a single directory on your computer.
+
+# Git and GitHub
+
+-   Thanks to [Eric Anderson](https://eriqande.netlify.app) for portions
+    of the git/github part of this lecture 
+    
+    ![Eric Anderson](images/Eric-Anderson-60.jpg)
+
+## Git {.smaller}
+
+-   A version control system, or VCS, tracks the history of changes as
+    people and teams collaborate on projects together. As the project
+    evolves, teams can run tests, fix bugs, and contribute new code with
+    the confidence that any version can be recovered at any time.
+    Developers can review project history to find out:
+
+    -   Which changes were made?
+    -   Who made the changes?
+    -   When were the changes made?
+    -   Why were changes needed?
+
+-   All of this is stored as "commits" inside an invisible directory
+    called .git
+
+```{bash}
+#| eval: false
+#| echo: true
+/reproducible_research/--% ls .git
+COMMIT_EDITMSG  config          hooks           info            objects         refs
+HEAD            description     index           logs            packed-refs
+```
+
+## A typical VCS for a non-computer programmer {.smaller}
+
+-   Start writing `my_manuscript.doc`.
+
+-   At some point worry that MS Word is going to eat your file, so,
+
+    -   Make a "backup" called `my_manuscript_A.docx`
+
+-   Then, before overhauling the discussion, save the current file as
+    `my_manuscript_EDC.docx`.
+
+-   Email it to your coauthors and then have a series of files with
+    other extensions such as the initials of their names when they edit
+    them and send them back. Save as `my_manuscript_EDC_MM_RGP.docx`
+
+-   Etc.
+
+-   Disadvantages:
+
+    -   Hard to find a good record of what is in each version. (Wait! I
+        liked the introduction I wrote three weeks ago...where is that
+        now?)
+    -   A terrible system if you have multiple files that are dependent
+        on one another
+    -   If you decide that you want to merge the changes you made to the
+        discussion in version `_C` with the edits on the introduction in
+        version `_K`, it is hard.
+
+## GitHub (and others) is a distributed version control system (DVCS) {.smaller}
+
+-   Git stores "snapshots" of your collection of files in a repository,
+    which can be stored on GitHub
+
+-   For our work, the "collection of files" will be "the stuff in your
+    RStudio project"
+
+    -   Another reason it is nice to keep everything you need for a
+        project together in a "project directory"
+
+-   When you clone or repository, **you** get the whole version history
+
+-   When someone else clones that repository, **they also** get the
+    whole version history.
+
+-   Git has well-developed features for merging changes made in
+    different repositories
+
+-   Unlike once popular centralized version control systems (rcs, cvs,
+    subversion), DVCSs like GitHub don't need a constant connection to a
+    central repository. Developers can work anywhere and collaborate
+    asynchronously from any time zone.
+
+## Github as a distributed version control system
+
+Nate Silver of fivethirtyeight.com once called github "Facebook for nerds"
+
+![Github DVCS](images/github_dvcs.jpg)
+
+## GitHub (and others) is a distributed version control system (DVCS) {.smaller}
+
+-   Git and a DVCS system allow multiple people to work on multiple
+    versions ("branches") of a piece of software at the same time,
+    without breaking the main branch. This approach can be used to add
+    features or fix bugs.
+
+-   To eliminate unnecessary work, Git and other VCSs give each
+    contributor a unified and consistent view of a project, surfacing
+    work that's already in progress. Seeing a transparent history of
+    changes, who made them, and how they contribute to the development
+    of a project helps team members stay aligned while working
+    independently.
+
+-   Without version control, team members are subject to redundant
+    tasks, slower timelines, and multiple copies of a single project.
+
+## GitHub Example for Software
+
+
+![The Github Flow](images/gitflow.png)
+
+## An example from my research {.smaller}
+
+![Stacks on Azure Github Repository](images/stacks_on_azure.png)
+
+
+## What's a repository? {.smaller}
+
+-   A *repository*, or [Git](https://git-scm.com) project, encompasses
+    the entire collection of files and folders associated with a project
+    (i.e. a directory), *along with each file's revision history*.
+
+-   The file history appears as snapshots in time called *commits*, and
+    can be organized into multiple lines of development called branches.
+
+-   Because Github is a DVCS, repositories are self-contained units and
+    anyone who owns a copy of the repository can access the entire
+    codebase and its history.
+
+-   Using the command line or other ease-of-use interfaces, a git
+    repository also allows for: interaction with the history, cloning,
+    creating branches, committing, merging, comparing changes across
+    versions of code, and more.
+
+-   Working in repositories keeps development projects organized and
+    protected. Developers are encouraged to fix bugs, or create fresh
+    features, without fear of derailing mainline development efforts.
+
+-   Through platforms like GitHub, Git also provides more opportunities
+    for project transparency and collaboration. Public repositories help
+    teams work together to build the best possible final product.
+
+## The Github Flow
+
+[Video](https://www.youtube.com/watch?v=47E-jcuQz5c)
+
+![The Github Flow](images/github_flow.jpg)
+
+## The GitHub Flow {.smaller}
+
+The GitHub flow has six steps, each with distinct benefits when
+implemented:
+
+-   Create a branch:Topic branches created from the canonical deployment
+    branch (usually master) allow teams to contribute to many parallel
+    efforts. Short-lived topic branches, in particular, keep teams
+    focused and results in quick ships.
+
+-   Add commits:Snapshots of development efforts within a branch create
+    safe, revertible points in the project's history.
+
+-   Open a pull request: Pull requests publicize a project's ongoing
+    efforts and set the tone for a transparent development process.
+
+## The GitHub Flow {.smaller}
+
+-   Discuss and review code:Teams participate in code reviews by
+    commenting, testing, and reviewing open pull requests. Code review
+    is at the core of an open and participatory culture.
+
+-   Merge:Upon clicking merge, GitHub automatically performs the
+    equivalent of a local 'git merge' operation. GitHub also keeps the
+    entire branch development history on the merged pull request.
+
+-   Deploy:Teams can choose the best release cycles or incorporate
+    continuous integration tools and operate with the assurance that
+    code on the deployment branch has gone through a robust workflow.
+
+## Alternatives to Github exist! {.smaller}
+
+-   Bitbucket
+-   Gitlab
+-   GitBucket (yes, its a thing)
+
+All work on a "freemium" model in which they provide free service to
+low-end users (like us), but charge for services needed by power users
+(like private repositories, more file storage space)
+
+Also, please note, while github can store data files up to 100 MB, it is not
+meant to be a repository for data! Consider keeping raw data files on a RAIDed
+(backed up) server (like Cassiopea!)
+
+# GitHub Tutorial
+
+## Do this in GitHub
+
+1.  Go to <https://github.com/ericcrandall/reproducible_research>
+2.  Click "Fork" in the upper right-hand corner and follow dialogue
+    prompts to create fork in your account
+
+## Do This in RStudio {.smaller}
+
+1.  Select File -> New Project
+
+2.  Create project from: Choose "Version Control" {.smaller}
+
+    1.  Choose "Git"
+    2.  Input the url of this repository
+        1.https://github.com/*yourusername*/reproducible_research
+    3.  and put it somewhere
+    4.  I suggest a directory coming off your home directory called
+        `github`.
+    5.  (browse to where you want to put it in the "create project as
+        subdirectory of:")
+    6.  So it should be in `yourhome/github/reproducible_research`
+    7.  Hit `Create Project`
+
+## The status/staging panel {.smaller}
+
+-   RStudio keeps git constantly scanning the project directory to find
+    any files that have changed or which are new.
+    
+-   Some symbols:
+
+    -   **Blue-M**: a file that is already under version control that
+        has been modified.
+    -   **Yellow-?**: a file that is not under version control (yet...)
+    -   **Green-A**: a file that was not under version control, but
+        which has been staged to be committed.
+    -   **Red-D**: a file under version control has been deleted. To
+        make it really disappear, you have to stage its disappearance
+        and commit.
+
+![RStudio Git Interface](images/rstudio_git.png)
+
+
+## Staging Files
+
+-   You can click the check box next to various files to stage them to
+    be part of a commit.
+
+    -   I generally stage all changes for every commit
+    -   But one could consider of being more strategic...
+    -   At the command line, staging or adding all *changed* files to a commit is
+        achieved by:
+
+```{bash}
+#| eval: false
+#| echo: true
+git add .
+```
+
+## The Commit window
+
+-   Click "commit" to reach the commit window
+-   Shows a "diff" of your changes.
+-   In other words, what has changed between the last committed version
+    of a file and its current state.
+-   Green = additions, red = deletions
+-   Holy smokes this is convenient
+-   (Note: all this output is available from the command line, but the
+    Rstudio interface is very nice, IMHO)
+
+## Making a Commit {.smaller}
+
+-   Super easy:
+
+    -   After staging the files you want to commit...
+    -   Write a brief message (first line short, then as much after that
+        as you want) about the new changes and hit the commit button.
+
+-   Tradition is to use present tense when describing your changes.
+
+    -   as in "Add new data file, update file slurping code"
+
+-   This can be really handy when trying to find where you made an
+    error!
+
+-   Spending a little time to write informative commit messages can pay
+    off.
+
+-   At the command line, a commit is achieved thusly:
+
+```{bash}
+#| eval: false
+#| echo: true
+
+git commit -m "my commit message"
+
+```
+
+## The History window
+
+-   Easy inspection of past commits.
+-   See what changes were made at each commit.
+-   At the command line you can see this with
+
+```{bash}
+#| eval: false
+#| echo: true
+git log
+```
+
+## How does git store and keep track of things
+
+-   Everything is stored in the .git folder inside the RStudio project.
+-   The "working copy" gets checked out out of there
+-   Committed changes are recorded to the directory
+
+## What is inside of the .git directory?
+
+We can use R to list the files.
+
+```{r list-git}
+# check out this file-system command in R
+dir(path = ".git", all.files = TRUE, recursive = TRUE)
+```
+
+*Yikes!*
+
+## How does git know a file has changed? {.smaller}
+
+-   Does it just look at the modification date?
+
+-   NO! It "fingerprints" every file, so it knows when it has changed
+    from the most recent committed version.
+
+    -   Demonstration. Change a file. Save, then undo the change and
+        save again...Git knows the file has been changed back to its
+        "former self"
+
+-   SHA-1 hashes.
+
+-   You will see things like `ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770`
+    all over in Git-land.
+
+-   You can treat them as very specific names for different commits.
+
+## How can I make git ignore certain files?
+
+-   The `.gitignore` file!
+-   File names (and patterns) in the `.gitignore` file are ignored
+    *recursively* (down into subdirectories), by default.
+-   Files won't be ignored if they are already in the repository.
+-   Example: `*.html` 
+
+## Go for it everyone! Git to playing
+
+-   Make some changes and commit them yourselves.\
+-   Add some new files to the project, and commit those.
+-   Get familiar with the diff window.
+-   Check the history after a few commits.
+
+# Intro to Rmarkdown
+
+-   Designed as a text *markup* language that would be
+
+    -   Simple
+    -   Expressive
+    -   Intuitive
+    -   Capable of conveying intent even without being compiled into
+        HTML or PDF
+
+-   There are many Markdown interpreters. The Rstudio folks have been
+    using [pandoc](http://johnmacfarlane.net/pandoc/) to crunch Markdown
+    into other formats. It provides many useful extensions.
+
+-   Customizations of style are mostly separate from the **content**.
+
+-   [This presentation was made in
+    Rmarkdown!](https://bookdown.org/yihui/rmarkdown/presentations.html)
+
+## To Do
+
+Add Merge Conflicts Add Revert Add Rebase Add "github pages" \* Open the
+shell (Tools->Shell...) and issue these two commands, replacing the name
+"John Doe" with yours, and his email with yours. + Use the email address
+that you gave to GitHub.
+
