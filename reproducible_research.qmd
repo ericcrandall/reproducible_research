@@ -217,8 +217,7 @@ Science](http://news.sciencemag.org/policy/2014/10/battle-between-nsf-and-house-
 
 ## Rstudio
 
-- R studio is an Integrated Developer Environment (IDE) for R that *sits on top of* R and makes
-it easier to work. 
+- R studio is an Integrated Developer Environment (IDE) for R that *sits on top of* R and makes it easier to work. 
 
 - Organizes your work in R in
 neatly-contained packages of work (typically data and code) called
@@ -232,7 +231,7 @@ stored together in a single directory on your computer.
 -   Thanks to [Eric Anderson](https://eriqande.netlify.app) for portions
     of the git/github part of this lecture 
     
-    ![Eric Anderson](images/Eric-Anderson-60.jpg)
+    ![](images/Eric-Anderson-60.jpg)
 -   Thanks to [Happy Git and Github for the useR](https://happygitwithr.com) by Jennifer Bryan for other portions!
     
     ![Watch Me Diff](https://happygitwithr.com/img/watch-me-diff-watch-me-rebase-smaller.png)
@@ -285,9 +284,7 @@ HEAD            description     index           logs            packed-refs
         now?)
     -   A terrible system if you have multiple files that are dependent
         on one another
-    -   If you decide that you want to merge the changes you made to the
-        discussion in version `_C` with the edits on the introduction in
-        version `_K`, it is hard.
+    -   Now better with Google Docs etc.
 
 ## GitHub (and others) is a distributed version control system (DVCS) {.smaller}
 
@@ -299,11 +296,10 @@ HEAD            description     index           logs            packed-refs
 
     -   Another reason it is nice to keep everything you need for a
         project together in a "project directory"
+    -   This makes it perfect as an electronic notebook especially because *nothing is ever erased, really*
+        
 
 -   When you clone or repository, **you** get the whole version history
-
--   When someone else clones that repository, **they also** get the
-    whole version history.
 
 -   Git has well-developed features for merging changes made in
     different repositories
@@ -345,12 +341,11 @@ Nate Silver of fivethirtyeight.com once called github "Facebook for nerds"
 
 ![Stacks on Azure Github Repository](images/stacks_on_azure.png)
 
-
 ## What's a repository? {.smaller}
 
 -   A *repository*, or [Git](https://git-scm.com) project, encompasses
     the entire collection of files and folders associated with a project
-    (i.e. a directory), *along with each file's revision history*.
+    (i.e. a directory), *along with each file's revision history* (stored in      the .git directory)
 
 -   The file history appears as snapshots in time called *commits*, and
     can be organized into multiple lines of development called branches.
@@ -422,13 +417,13 @@ Also, please note, while github can store data files up to 100 MB, it is not
 meant to be a repository for data! Consider keeping raw data files on a RAIDed
 (backed up) server (like Cassiopea!)
 
-# GitHub Tutorial
+# Git/GitHub Tutorial
 
 ## Do this in GitHub
 
 1.  Go to <https://github.com/ericcrandall/reproducible_research>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
-    prompts to create fork in your account
+    prompts to create a forked repository in your account
 
 ## Do This in RStudio {.smaller}
 
