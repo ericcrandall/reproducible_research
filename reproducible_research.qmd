@@ -100,17 +100,17 @@ discriminant analysis published between 1991 and 2011: received only
 # Tools for Research Reproducibility {.smaller}
 
 -   Open Source Everything
--   R language
--   Rstudio and knitR
--   Markdown and LaTeX
 -   Unix operating system
 -   GitHub and git - version control
+-   Markdown and LaTeX
+-   R language
+-   Rstudio, knitR, Quarto
 -   Creative Commons Licensing
 -   [Online
     Repositories](http://oad.simmons.edu/oadwiki/Data_repositories)
     (Dryad, Genbank,GBIF, GEOME, new ones all the time)
     
-Good habits to get into as a student!
+Get started with these as a grad student/postdoc!
 
 ## Stop Using Excel! {.smaller}
 
@@ -217,8 +217,7 @@ Science](http://news.sciencemag.org/policy/2014/10/battle-between-nsf-and-house-
 
 ## Rstudio
 
-- R studio is an Integrated Developer Environment (IDE) for R that *sits on top of* R and makes
-it easier to work. 
+- R studio is an Integrated Developer Environment (IDE) for R that *sits on top of* R and makes it easier to work. 
 
 - Organizes your work in R in
 neatly-contained packages of work (typically data and code) called
@@ -227,12 +226,15 @@ neatly-contained packages of work (typically data and code) called
 - Nothing mysterious about these---just collections of files
 stored together in a single directory on your computer.
 
-# Git and GitHub
+# Git and GitHub {.smaller}
 
 -   Thanks to [Eric Anderson](https://eriqande.netlify.app) for portions
     of the git/github part of this lecture 
     
-    ![Eric Anderson](images/Eric-Anderson-60.jpg)
+    ![](images/Eric-Anderson-60.jpg)
+-   Thanks to [Happy Git and Github for the useR](https://happygitwithr.com) by Jennifer Bryan for other portions!
+    
+    ![Watch Me Diff](https://happygitwithr.com/img/watch-me-diff-watch-me-rebase-smaller.png)
 
 ## Git {.smaller}
 
@@ -282,9 +284,7 @@ HEAD            description     index           logs            packed-refs
         now?)
     -   A terrible system if you have multiple files that are dependent
         on one another
-    -   If you decide that you want to merge the changes you made to the
-        discussion in version `_C` with the edits on the introduction in
-        version `_K`, it is hard.
+    -   Now better with Google Docs etc.
 
 ## GitHub (and others) is a distributed version control system (DVCS) {.smaller}
 
@@ -296,11 +296,10 @@ HEAD            description     index           logs            packed-refs
 
     -   Another reason it is nice to keep everything you need for a
         project together in a "project directory"
+    -   This makes it perfect as an electronic notebook especially because *nothing is ever erased, really*
+        
 
 -   When you clone or repository, **you** get the whole version history
-
--   When someone else clones that repository, **they also** get the
-    whole version history.
 
 -   Git has well-developed features for merging changes made in
     different repositories
@@ -342,12 +341,11 @@ Nate Silver of fivethirtyeight.com once called github "Facebook for nerds"
 
 ![Stacks on Azure Github Repository](images/stacks_on_azure.png)
 
-
 ## What's a repository? {.smaller}
 
 -   A *repository*, or [Git](https://git-scm.com) project, encompasses
     the entire collection of files and folders associated with a project
-    (i.e. a directory), *along with each file's revision history*.
+    (i.e. a directory), *along with each file's revision history* (stored in      the .git directory)
 
 -   The file history appears as snapshots in time called *commits*, and
     can be organized into multiple lines of development called branches.
@@ -420,13 +418,13 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
 (backed up) server (like Cassiopea!). You can also put big files in your 
 .gitignore file so that they aren't transferred to github.
 
-# GitHub Tutorial
+# Git/GitHub Tutorial
 
 ## Do this in GitHub
 
 1.  Go to <https://github.com/ericcrandall/reproducible_research>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
-    prompts to create fork in your account
+    prompts to create a forked repository in your account
 
 ## Do This in RStudio {.smaller}
 
