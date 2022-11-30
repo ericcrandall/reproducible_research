@@ -2,6 +2,8 @@
 title: "Across The Universe"
 output: html_notebook
 author: "John Lennon"
+execute:
+  echo: false
 format:
   html:
     code-fold: true

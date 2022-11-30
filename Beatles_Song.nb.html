@@ -1500,6 +1500,8 @@ window.initializeCodeFolding = function(show) {
   // select all R code blocks
   var rCodeBlocks = $('pre.r, pre.python, pre.bash, pre.sql, pre.cpp, pre.stan, pre.julia, pre.foldable');
   rCodeBlocks.each(function() {
+    // skip if the block has fold-none class
+    if ($(this).hasClass('fold-none')) return;
 
     // create a collapsable div to wrap the code in
     var div = $('<div class="collapse r-code-collapse"></div>');
@@ -1515,7 +1517,9 @@ window.initializeCodeFolding = function(show) {
     showCodeButton.append(showCodeText);
     showCodeButton
         .attr('data-toggle', 'collapse')
+        .attr('data-bs-toggle', 'collapse') // BS5
         .attr('data-target', '#' + id)
+        .attr('data-bs-target', '#' + id)   // BS5
         .attr('aria-expanded', showThis)
         .attr('aria-controls', id);
 
@@ -1605,6 +1609,7 @@ if (window.hljs) {
 
 
 
+
 <style type="text/css">
 #rmd-source-code {
 display: none;
@@ -1635,6 +1640,9 @@ outline: none;
 }
 summary {
 display: list-item;
+}
+details > summary > p:only-child {
+display: inline;
 }
 pre code {
 padding: 0;
@@ -1675,23 +1683,17 @@ overflow-y: auto;
 border: 1px solid #ddd;
 border-radius: 4px;
 }
-.tabset-dropdown > .nav-tabs > li.active:before {
-content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+content: "\e259";
 font-family: 'Glyphicons Halflings';
 display: inline-block;
 padding: 10px;
 border-right: 1px solid #ddd;
 }
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-content: "";
-border: none;
-}
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-content: "";
+content: "\e258";
 font-family: 'Glyphicons Halflings';
-display: inline-block;
-padding: 10px;
-border-right: 1px solid #ddd;
+border: none;
 }
 .tabset-dropdown > .nav-tabs > li.active {
 display: block;
@@ -1734,7 +1736,7 @@ display: none;
 <div id="header">
 
 <div class="btn-group pull-right float-right">
-<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
 <ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
 <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
 <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
@@ -1843,7 +1845,7 @@ print(&quot;Jai guru deva&quot;)
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQWNyb3NzIFRoZSBVbml2ZXJzZSIKb3V0cHV0OiBodG1sX25vdGVib29rCmF1dGhvcjogIkpvaG4gTGVubm9uIgpmb3JtYXQ6CiAgaHRtbDoKICAgIGNvZGUtZm9sZDogdHJ1ZQoKLS0tCgohW0Fjcm9zcyBUaGUgVW5pdmVyc2VdKGh0dHBzOi8vdG93bnNxdWFyZS5tZWRpYS9zaXRlLzI5NS9maWxlcy8yMDE3LzA1L0JlYXRsZXMuanBnP3c9OTgwJnE9NzUpCgojIEx5cmljcyB0byAiQWNyb3NzIFRoZSBVbml2ZXJzZSIKCiMjIEZyb20gTm90aGluZydzIEdvbm5hIENoYW5nZSBPdXIgV29ybGQKCldvcmRzIGFyZSBmbG93aW5nIG91dCBsaWtlIGVuZGxlc3MgcmFpbiBpbnRvIGEgcGFwZXIgY3VwICAKVGhleSBzbGl0aGVyIHdpbGRseSBhcyB0aGV5IHNsaXAgYXdheSBhY3Jvc3MgdGhlIHVuaXZlcnNlICAKUG9vbHMgb2Ygc29ycm93LCB3YXZlcyBvZiBqb3kgYXJlIGRyaWZ0aW5nIHRocm91Z2ggbXkgb3BlbmVkIG1pbmQgIApQb3NzZXNzaW5nIGFuZCBjYXJlc3NpbmcgbWUgIAoqSmFpIGd1cnUgZGV2YSwgb20qICAKCmBgYHtyfQpmb3IoY2hvcnVzIGluIDE6NCl7CnByaW50KCJOb3RoaW5nJ3MgZ29ubmEgY2hhbmdlIG15IHdvcmxkIikKfQpgYGAKCkltYWdlcyBvZiBicm9rZW4gbGlnaHQgd2hpY2ggZGFuY2UgYmVmb3JlIG1lIGxpa2UgYSBtaWxsaW9uIGV5ZXMgIApUaGV5IGNhbGwgbWUgb24gYW5kIG9uIGFjcm9zcyB0aGUgdW5pdmVyc2UgIApUaG91Z2h0cyBtZWFuZGVyIGxpa2UgYSByZXN0bGVzcyB3aW5kIGluc2lkZSBhIGxldHRlcmJveCB0aGV5ICAKVGhleSB0dW1ibGUgYmxpbmRseSBhcyB0aGV5IG1ha2UgdGhlaXIgd2F5IGFjcm9zcyB0aGUgdW5pdmVyc2UgIAoqSmFpIGd1cnUgZGV2YSwgb20qICAKCmBgYHtyfQpmb3IoY2hvcnVzIGluIDE6NCl7CnByaW50KCJOb3RoaW5nJ3MgZ29ubmEgY2hhbmdlIG15IHdvcmxkIikKfQpgYGAKClNvdW5kcyBvZiBsYXVnaHRlciBzaGFkZXMgb2YgbGlmZSBhcmUgcmluZ2luZyAgClRocm91Z2ggbXkgb3BlbiBlYXJzIGluY2l0aW5nIGFuZCBpbnZpdGluZyBtZSAgCkxpbWl0bGVzcyB1bmR5aW5nIGxvdmUgd2hpY2ggc2hpbmVzIGFyb3VuZCBtZSBsaWtlIGEgbWlsbGlvbiBzdW5zICAKSXQgY2FsbHMgbWUgb24gYW5kIG9uIGFjcm9zcyB0aGUgdW5pdmVyc2UgIAoqSmFpIGd1cnUgZGV2YSwgb20qICAKCmBgYHtyfQpmb3IoY2hvcnVzIGluIDE6NCl7CnByaW50KCJOb3RoaW5nJ3MgZ29ubmEgY2hhbmdlIG15IHdvcmxkIikKfQpgYGAKCgoKYGBge3J9CiN8IGVjaG86IGZhbHNlCmZvcihjaG9ydXMgaW4gMTo2KXsKcHJpbnQoIkphaSBndXJ1IGRldmEiKQp9CmBgYAoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQWNyb3NzIFRoZSBVbml2ZXJzZSIKb3V0cHV0OiBodG1sX25vdGVib29rCmF1dGhvcjogIkpvaG4gTGVubm9uIgpleGVjdXRlOgogIGVjaG86IGZhbHNlCmZvcm1hdDoKICBodG1sOgogICAgY29kZS1mb2xkOiB0cnVlCgotLS0KCiFbQWNyb3NzIFRoZSBVbml2ZXJzZV0oaHR0cHM6Ly90b3duc3F1YXJlLm1lZGlhL3NpdGUvMjk1L2ZpbGVzLzIwMTcvMDUvQmVhdGxlcy5qcGc/dz05ODAmcT03NSkKCiMgTHlyaWNzIHRvICJBY3Jvc3MgVGhlIFVuaXZlcnNlIgoKIyMgRnJvbSBOb3RoaW5nJ3MgR29ubmEgQ2hhbmdlIE91ciBXb3JsZAoKV29yZHMgYXJlIGZsb3dpbmcgb3V0IGxpa2UgZW5kbGVzcyByYWluIGludG8gYSBwYXBlciBjdXAgIApUaGV5IHNsaXRoZXIgd2lsZGx5IGFzIHRoZXkgc2xpcCBhd2F5IGFjcm9zcyB0aGUgdW5pdmVyc2UgIApQb29scyBvZiBzb3Jyb3csIHdhdmVzIG9mIGpveSBhcmUgZHJpZnRpbmcgdGhyb3VnaCBteSBvcGVuZWQgbWluZCAgClBvc3Nlc3NpbmcgYW5kIGNhcmVzc2luZyBtZSAgCipKYWkgZ3VydSBkZXZhLCBvbSogIAoKYGBge3J9CmZvcihjaG9ydXMgaW4gMTo0KXsKcHJpbnQoIk5vdGhpbmcncyBnb25uYSBjaGFuZ2UgbXkgd29ybGQiKQp9CmBgYAoKSW1hZ2VzIG9mIGJyb2tlbiBsaWdodCB3aGljaCBkYW5jZSBiZWZvcmUgbWUgbGlrZSBhIG1pbGxpb24gZXllcyAgClRoZXkgY2FsbCBtZSBvbiBhbmQgb24gYWNyb3NzIHRoZSB1bml2ZXJzZSAgClRob3VnaHRzIG1lYW5kZXIgbGlrZSBhIHJlc3RsZXNzIHdpbmQgaW5zaWRlIGEgbGV0dGVyYm94IHRoZXkgIApUaGV5IHR1bWJsZSBibGluZGx5IGFzIHRoZXkgbWFrZSB0aGVpciB3YXkgYWNyb3NzIHRoZSB1bml2ZXJzZSAgCipKYWkgZ3VydSBkZXZhLCBvbSogIAoKYGBge3J9CmZvcihjaG9ydXMgaW4gMTo0KXsKcHJpbnQoIk5vdGhpbmcncyBnb25uYSBjaGFuZ2UgbXkgd29ybGQiKQp9CmBgYAoKU291bmRzIG9mIGxhdWdodGVyIHNoYWRlcyBvZiBsaWZlIGFyZSByaW5naW5nICAKVGhyb3VnaCBteSBvcGVuIGVhcnMgaW5jaXRpbmcgYW5kIGludml0aW5nIG1lICAKTGltaXRsZXNzIHVuZHlpbmcgbG92ZSB3aGljaCBzaGluZXMgYXJvdW5kIG1lIGxpa2UgYSBtaWxsaW9uIHN1bnMgIApJdCBjYWxscyBtZSBvbiBhbmQgb24gYWNyb3NzIHRoZSB1bml2ZXJzZSAgCipKYWkgZ3VydSBkZXZhLCBvbSogIAoKYGBge3J9CmZvcihjaG9ydXMgaW4gMTo0KXsKcHJpbnQoIk5vdGhpbmcncyBnb25uYSBjaGFuZ2UgbXkgd29ybGQiKQp9CmBgYAoKCgpgYGB7cn0KI3wgZWNobzogZmFsc2UKZm9yKGNob3J1cyBpbiAxOjYpewpwcmludCgiSmFpIGd1cnUgZGV2YSIpCn0KYGBgCgoK</div>
 
 
 
