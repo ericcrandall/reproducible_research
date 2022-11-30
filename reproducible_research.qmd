@@ -517,11 +517,95 @@ git commit -m "my commit message"
 
 ```
 
-## A commit analogy
+## A commit analogy {.smaller}
+
+![](https://www.mountaineers.org/books/books/rock-climbing-anchors-2nd-edition-a-comprehensive-guide/images/rca_gal2/@@images/3164c24c-0e97-4a08-905d-2e3380701eff.jpeg)
 
 > Using a Git commit is like using anchors and other protection when climbing. If you’re crossing a dangerous rock face you want to make sure you’ve used protection to catch you if you fall. Commits play a similar role: if you make a mistake, you can’t fall past the previous commit. Coding without commits is like free-climbing: you can travel much faster in the short-term, but in the long-term the chances of catastrophic failure are high! Like rock climbing protection, you want to be judicious in your use of commits. Committing too frequently will slow your progress; use more commits when you’re in uncertain or dangerous territory. Commits are also helpful to others, because they show your journey, not just the destination.
 
 --Hadley Wickham (PBUH), 2015
+
+
+
+## Pushing and Pulling {.smaller}
+
+-   Everything we've done so far has been local. We've staged files (`git add`) and made commits (`git commit -m "message"`), which got added to our invisible `.git` directory.
+
+-   Now we want to `push` these up to Github. Easy - just use the green arrow, or at the command line, `git push`. 
+   -  If you want to get all fancy, you could type `git push origin main` 
+      - `origin` is the name of the remote site (in theory you could have more than one)
+      - `main` is the name of the branch.
+   
+-  If you want to bring down changes from Github, its just the blue arrow, or `git pull`.
+    - **Important** get in the habit of pulling before doing anything else when you start working on a project. Otherwise you might get ...dun dun dun... merge conflicts
+    - Use `git pull --ff-only` to categorically avoid pulling commits that have merge conflicts (but you'll still have to deal with it eventually)
+    
+## Dealing with Merge Conflicts {.smaller}
+
+  - There you are, working away, when you try to push a commit and get:
+  
+    ```
+    $ git push
+    To https://github.com/YOU/REPO.git
+    ! [rejected]        main -> main (fetch first)
+    error: failed to push some refs to 'https://github.com/YOU/REPO.git'
+    hint: Updates were rejected because the remote contains work that you do
+    hint: not have locally. This is usually caused by another repository pushing
+    hint: to the same ref. You may want to first integrate the remote changes
+    hint: (e.g., 'git pull ...') before pushing again.
+    hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+    ```
+  - This means that someone (you on another computer or a collaborator), has changed the same file(s) that you have changed.
+  In the abstract, this is the state on GitHub:
+  
+    ```
+    A -- B -- C (on GitHub)
+    ```
+    
+    And this is your local state:
+    
+    ```
+    A -- B -- D (what you have)
+    ```
+    
+  - This situation is best avoided, either by *pulling often*, communication with your
+  collaborator or through the use of branches (coming up).
+
+## Dealing with Merge Conflicts {.smaller}
+
+  - So you try to pull and you get:
+    ![](images/pull_rejection.png)
+  - You have two choices: 
+    - stash your changes (basically, hide them for a bit, or lose them forever)
+    - commit your changes, and then handle the merge.
+
+## Dealing with Merge Conflicts {.smaller}
+
+ - Stashing basically lets you punt 
+    ```{bash}
+    git stash save
+    git pull
+    git stash pop # the merge conflict will re um emerge at this point
+    ```
+    
+  - Commit the your conflicting changes and then deal with the merge conflict.
+  - If you're lucky, you were editing, different parts of the file. In this case, git will figure this out, and just auto-merge for you.
+  ![](images/auto_merge.png)
+
+## Dealing with Merge Conflicts {.smaller}
+
+
+
+
+## Time Travelling
+
+git checkout <COMMIT#> <path/to/the/messed/up/file>
+
+# Branches and Pull Requests
+
+
+    
+    
 
 ## The History window
 

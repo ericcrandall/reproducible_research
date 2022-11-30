@@ -411,6 +411,9 @@ low-end users (like us), but charge for services needed by power users
 1.  Go to <https://github.com/ericcrandall/reproducible_research>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
     prompts to create fork in your account
+3.  If you want to create a new git repository for yourself, the best approach
+    to create it on on the DVCS (Github, Bitbucket, etc.), and then copy the URL
+    proceed with the following steps.
 
 ## Do This in RStudio
 
@@ -494,10 +497,27 @@ git add .
 
 -   At the command line, a commit is achieved thusly:
 
-```{bash, eval = F}
+```{bash}
+#| eval: false
+#| echo: true
 git commit -m "my commit message"
 
 ```
+
+## Pushing and Pulling {.smaller}
+
+-   Everything we've done so far has been local. We've staged files (`git add`) and made commits (`git commit -m "message"`), which got added to our invisible `.git` directory.
+
+-   Now we want to `push` these up to Github. Easy - just use the green arrow, or at the command line, `git push`. 
+   -  If you want to get all fancy, you could type `git push origin main`. `origin` is the name of the remote site (in theory you could have more than one) and `main` is the name of the branch.
+   
+-  If you want to bring down changes from Github, its just the blue arrow, or `git pull`.
+    - **Important** get in the habit of pulling before doing anything else when you start working on a project. Otherwise you might get ...dun dun dun... merge conflicts
+    - Use `git pull --ff-only` to categorically avoid pulling commits that have merge conflicts (but you'll still have to deal with it eventually)
+
+
+
+
 
 ## The History window
 
@@ -509,7 +529,9 @@ git commit -m "my commit message"
 git log
 ```
 
-## How does git store and keep track of things {#git-how}
+## So what happens if I pull
+
+## How does git store and keep track of things
 
 -   Everything is stored in the .git folder inside the RStudio project.
 -   The "working copy" gets checkout out of there
@@ -550,7 +572,11 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 -   File names (and patterns) in the `.gitignore` file are ignored
     *recursively* (down into subdirectories), by default.
 -   Files won't be ignored if they are already in the repository.
--   Example: `*.html` ## Go for it everyone! Git to playing
+-   Example: `*.html`
+-   Useful for ignoring data files, or other things you want to stay local (e.g. for privacy reasons)
+
+
+## Go for it everyone! Git to playing
 -   Make some changes and commit them yourselves.\
 -   Add some new files to the project, and commit those.
 -   Get familiar with the diff window.
