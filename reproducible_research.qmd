@@ -8,6 +8,11 @@ format:
     incremental: true
 ---
 
+```{r}
+#| echo: false
+library(emoji)
+```
+
 # What is Reproducibility? {.smaller}
 
 [Gandrud 2014](Gandrud_Reproducible_Research_with_R_and_RStudio.pdf)
@@ -582,44 +587,68 @@ git commit -m "my commit message"
 ## Dealing with Merge Conflicts {.smaller}
 
  - Stashing basically lets you punt 
-    ```{bash}
-    git stash save
-    git pull
-    git stash pop # the merge conflict will re um emerge at this point
-    ```
+```{bash}
+#| echo: true
+#| eval: false
+git stash save
+git pull
+git stash pop # the merge conflict will re um emerge at this point
+```
     
-  - Commit the your conflicting changes and then deal with the merge conflict.
+  - Commit your conflicting changes and then deal with the merge conflict.
   - If you're lucky, you were editing, different parts of the file. In this case, git will figure this out, and just auto-merge for you.
   ![](images/auto_merge.png)
+  - If not, then git will highlight the areas of conflict for you, allowing you to fix the problem manually (we'll do this together)
 
-## Dealing with Merge Conflicts {.smaller}
+## Dealing with Merge Conflicts
 
+  - If not, then git will highlight the areas of conflict for you, allowing you to fix the problem manually (we'll do this together)
 
+## Time Travelling {.smaller}
 
+Having learned how to keep a history of your work, its useful to know how to access it. This is where RStudio and GitHub become extra useful, because they provide nice GUI interfaces to your history
 
-## Time Travelling
+:::: {.columns}
 
-git checkout <COMMIT#> <path/to/the/messed/up/file>
+:::{.column width="60%"}
+![Rstudio History](images/stacks_on_azure.png)
+:::
 
-# Branches and Pull Requests
+:::{.column width="40%"}
+![GitHub History](images/github_history.jpg)
+:::
 
+::::
 
-    
-    
+You can visit these old commits and individual files in GitHub, download them, and get back code and ideas that you might have deleted in the current version of your repository!
 
-## The History window
+## Time Travelling {.smaller}
 
--   Easy inspection of past commits.
--   See what changes were made at each commit.
--   At the command line you can see this with
+From the commmand line you can also 
 
-```{bash}
-#| eval: false
-#| echo: true
+```
 git log
 ```
 
-![RStudio Git Interface](images/rstudio_git.png)
+Once you have the hash of the commit (e.g. `57faaD01`) you can use  
+
+```
+git checkout` <COMMIT#> <path/to/the/messed/up/file>
+```
+
+to get back old commits and files as well. But this leads you into a confusing place of working from a "detached head" `r emoji("face screaming in fear")`. Better to do this on Github until you are more comfortable with git.
+
+# Branches and Pull Requests
+
+Create a new branch
+
+```
+git branch fix_issue_105
+git checkout fix_issue_105
+```
+
+Then issue a pull request.
+
 
 ## How does git store and keep track of things
 
@@ -666,6 +695,7 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 
 ## Go for it everyone! Git to playing
 
+-   We'll first create a merge conflict and deal with it.
 -   Make some changes and commit them yourselves.\
 -   Add some new files to the project, and commit those.
 -   Get familiar with the diff window.
