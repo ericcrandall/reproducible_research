@@ -408,7 +408,7 @@ low-end users (like us), but charge for services needed by power users
 
 ## Do this in GitHub
 
-1.  Go to <https://github.com/ericcrandall/reproducible_research>
+1.  Go to <https://github.com/ericcrandall/reproducible_research_practical>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
     prompts to create fork in your account
 3.  If you want to create a new git repository for yourself, the best approach
@@ -423,13 +423,13 @@ low-end users (like us), but charge for services needed by power users
 
     1.  Choose "Git"
     2.  Input the url of this repository
-        1.https://github.com/*yourusername*/reproducible_research
+        1.https://github.com/*yourusername*/reproducible_research_practical
     3.  and put it somewhere
     4.  I suggest a repository coming off your home directory called
         `github`.
     5.  (browse to where you want to put it in the "create project as
         subdirectory of:")
-    6.  So it should be in `yourhome/github/reproducible_research`
+    6.  So it should be in `yourhome/github/reproducible_research_practical`
     7.  Hit `Create Project`
 
 ## The status/staging panel
@@ -534,7 +534,7 @@ git log
 ## How does git store and keep track of things
 
 -   Everything is stored in the .git folder inside the RStudio project.
--   The "working copy" gets checkout out of there
+-   The "working copy" gets checked out of there
 -   Committed changes are recorded to the directory
 
 ## What is inside of the .git directory?
@@ -564,7 +564,7 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 -   You will see things like `ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770`
     all over in Git-land.
 
--   You can treat them as very specific names for different commits.
+-   You can treat them as very specific names for different commits. You can usually just type the first 8 letters of the hash to identify a specific commit.
 
 ## How can I make git ignore certain files?
 
@@ -573,14 +573,10 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
     *recursively* (down into subdirectories), by default.
 -   Files won't be ignored if they are already in the repository.
 -   Example: `*.html`
--   Useful for ignoring data files, or other things you want to stay local (e.g. for privacy reasons)
+-   Useful for ignoring large data files, or other things you want to stay local (e.g. for privacy reasons)
 
 
-## Go for it everyone! Git to playing
--   Make some changes and commit them yourselves.\
--   Add some new files to the project, and commit those.
--   Get familiar with the diff window.
--   Check the history after a few commits.
+
 
 ## Intro to Rmarkdown
 
@@ -601,6 +597,11 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 -   [This presentation was made in
     Rmarkdown!](https://bookdown.org/yihui/rmarkdown/presentations.html)
 
+## Go for it everyone! Git to playing
+-   Make some changes and commit them yourselves.\
+-   Add some new files to the project, and commit those.
+-   Get familiar with the diff window.
+-   Check the history after a few commits.
 ## To Do
 
 Add Merge Conflicts Add Revert Add Rebase Add "github pages" \* Open the

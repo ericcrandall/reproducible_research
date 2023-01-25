@@ -427,7 +427,7 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
 
 ## Do this in GitHub
 
-1.  Go to <https://github.com/ericcrandall/reproducible_research>
+1.  Go to <https://github.com/ericcrandall/reproducible_research_practical>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
     prompts to create a forked repository in your account
 
@@ -439,13 +439,13 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
 
     1.  Choose "Git"
     2.  Input the url of this repository
-        1.https://github.com/*yourusername*/reproducible_research
+        1.https://github.com/*yourusername*/reproducible_research_practical
     3.  and put it somewhere
     4.  I suggest a directory coming off your home directory called
         `github`.
     5.  (browse to where you want to put it in the "create project as
         subdirectory of:")
-    6.  So it should be in `yourhome/github/reproducible_research`
+    6.  So it should be in `yourhome/github/reproducible_research_practical`
     7.  Hit `Create Project`
 
 ## The status/staging panel {.smaller}
@@ -590,6 +590,7 @@ git commit -m "my commit message"
 ```{bash}
 #| echo: true
 #| eval: false
+
 git stash save
 git pull
 git stash pop # the merge conflict will re um emerge at this point
@@ -638,16 +639,20 @@ git checkout` <COMMIT#> <path/to/the/messed/up/file>
 
 to get back old commits and files as well. But this leads you into a confusing place of working from a "detached head" `r emoji("face screaming in fear")`. Better to do this on Github until you are more comfortable with git.
 
-# Branches and Pull Requests
+## Branches and Pull Requests {.smaller}
 
-Create a new branch
+  - Create a new branch
 
 ```
 git branch fix_issue_105
 git checkout fix_issue_105
 ```
 
-Then issue a pull request.
+  - Work on your code, committing as you go.
+
+  - Then issue a pull request to the owner of the repository (this is done on github). You may need to write a justification of the changes you've made.
+  
+  - The owner of the repository will then be able to review all of the changes you've made (they'll see a diff, just like you do when you commit), and can then choose to merge your code into the main branch.
 
 
 ## How does git store and keep track of things
@@ -683,7 +688,7 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 -   You will see things like `ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770`
     all over in Git-land.
 
--   You can treat them as very specific names for different commits.
+-   You can treat them as very specific names for different commits. Usually just the first 8 characters are all you need.
 
 ## How can I make git ignore certain files?
 
@@ -701,7 +706,7 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 -   Get familiar with the diff window.
 -   Check the history after a few commits.
 
-# Intro to Rmarkdown
+# Intro to Rmarkdown {.smaller}
 
 -   Designed as a text *markup* language that would be
 
@@ -722,7 +727,7 @@ dir(path = ".git", all.files = TRUE, recursive = TRUE)
 
 ## To Do
 
-Add Merge Conflicts Add Revert Add Rebase Add "github pages" \* Open the
+Add Revert Add Rebase Add "github pages" \* Open the
 shell (Tools->Shell...) and issue these two commands, replacing the name
 "John Doe" with yours, and his email with yours. + Use the email address
 that you gave to GitHub.
