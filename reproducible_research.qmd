@@ -45,7 +45,7 @@ discriminant analysis published between 1991 and 2011: received only
 
 ## Same thing happens for genomic metadata 
 
-![Crandall et al. in review: Figure 4](images/Figure4_LogisticModels.jpg)
+![Crandall et al. 2023: Figure 4](images/Figure4_LogisticModels.jpg)
 
 ## Data not only need to be easily available, but methods also need to be reproducible {.smaller}
 
@@ -290,6 +290,49 @@ HEAD            description     index           logs            packed-refs
     -   A terrible system if you have multiple files that are dependent
         on one another
     -   Now better with Google Docs etc.
+    
+## How does git store and keep track of things
+
+-   Everything is stored in the *invisible* .git folder inside the RStudio project.
+-   The "working copy" gets checked out out of there
+-   Committed changes are recorded to the directory
+
+## What is inside of the .git directory?
+
+We can use R to list the files.
+
+```{r list-git}
+# check out this file-system command in R
+dir(path = ".git", all.files = TRUE, recursive = TRUE)
+```
+
+*Yikes!*
+
+## How does git know a file has changed? {.smaller}
+
+-   Does it just look at the modification date?
+
+-   NO! It "fingerprints" every file, so it knows when it has changed
+    from the most recent committed version.
+
+    -   Demonstration. Change a file. Save, then undo the change and
+        save again...Git knows the file has been changed back to its
+        "former self"
+
+-   SHA-1 hashes.
+
+-   You will see things like `ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770`
+    all over in Git-land.
+
+-   You can treat them as very specific names for different commits.
+
+## How can I make git ignore certain files?
+
+-   The `.gitignore` file!
+-   File names (and patterns) in the `.gitignore` file are ignored
+    *recursively* (down into subdirectories), by default.
+-   Files won't be ignored if they are already in the repository.
+-   Example: `*.html` 
 
 ## GitHub (and others) is a distributed version control system (DVCS) {.smaller}
 
@@ -427,11 +470,11 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
 
 ## Do this in GitHub
 
-1.  Go to <https://github.com/ericcrandall/reproducible_research>
+1.  Go to <https://github.com/ericcrandall/reproducible_research_practical>
 2.  Click "Fork" in the upper right-hand corner and follow dialogue
     prompts to create a forked repository in your account
 
-## Do This in RStudio {.smaller}
+## Do This in RStudio
 
 1.  Select File -> New Project
 
@@ -439,7 +482,7 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
 
     1.  Choose "Git"
     2.  Input the url of this repository
-        1.https://github.com/*yourusername*/reproducible_research
+        1.https://github.com/*yourusername*/reproducible_research_practical
     3.  and put it somewhere
     4.  I suggest a directory coming off your home directory called
         `github`.
@@ -473,7 +516,7 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
     be part of a commit.
 
     -   I generally stage all changes for every commit
-    -   But one could consider of being more strategic...
+    -   But one could consider being more strategic...
     -   At the command line, staging or adding all *changed* files to a commit is
         achieved by:
 
@@ -524,7 +567,7 @@ git commit -m "my commit message"
 
 ## A commit analogy {.smaller}
 
-![](https://www.mountaineers.org/books/books/rock-climbing-anchors-2nd-edition-a-comprehensive-guide/images/rca_gal2/@@images/3164c24c-0e97-4a08-905d-2e3380701eff.jpeg)
+![](https://images.squarespace-cdn.com/content/v1/55830fd9e4b0ec758c892f81/1502123872645-1TDC1C42ZKSETL32TGPN/image-asset.jpeg?format=2500w)
 
 > Using a Git commit is like using anchors and other protection when climbing. If you’re crossing a dangerous rock face you want to make sure you’ve used protection to catch you if you fall. Commits play a similar role: if you make a mistake, you can’t fall past the previous commit. Coding without commits is like free-climbing: you can travel much faster in the short-term, but in the long-term the chances of catastrophic failure are high! Like rock climbing protection, you want to be judicious in your use of commits. Committing too frequently will slow your progress; use more commits when you’re in uncertain or dangerous territory. Commits are also helpful to others, because they show your journey, not just the destination.
 
@@ -545,7 +588,7 @@ git commit -m "my commit message"
     - **Important** get in the habit of pulling before doing anything else when you start working on a project. Otherwise you might get ...dun dun dun... merge conflicts
     - Use `git pull --ff-only` to categorically avoid pulling commits that have merge conflicts (but you'll still have to deal with it eventually)
     
-## Dealing with Merge Conflicts {.smaller}
+## Dealing with Merge Conflicts
 
   - There you are, working away, when you try to push a commit and get:
   
@@ -560,6 +603,9 @@ git commit -m "my commit message"
     hint: (e.g., 'git pull ...') before pushing again.
     hint: See the 'Note about fast-forwards' in 'git push --help' for details.
     ```
+
+## Dealing with Merge Conflicts
+
   - This means that someone (you on another computer or a collaborator), has changed the same file(s) that you have changed.
   In the abstract, this is the state on GitHub:
   
@@ -596,7 +642,7 @@ git stash pop # the merge conflict will re um emerge at this point
 ```
     
   - Commit your conflicting changes and then deal with the merge conflict.
-  - If you're lucky, you were editing, different parts of the file. In this case, git will figure this out, and just auto-merge for you.
+  - If you're lucky, you were editing different parts of the file. In this case, git will figure this out, and just auto-merge for you.
   ![](images/auto_merge.png)
   - If not, then git will highlight the areas of conflict for you, allowing you to fix the problem manually (we'll do this together)
 
@@ -649,49 +695,6 @@ git checkout fix_issue_105
 
 Then issue a pull request.
 
-
-## How does git store and keep track of things
-
--   Everything is stored in the .git folder inside the RStudio project.
--   The "working copy" gets checked out out of there
--   Committed changes are recorded to the directory
-
-## What is inside of the .git directory?
-
-We can use R to list the files.
-
-```{r list-git}
-# check out this file-system command in R
-dir(path = ".git", all.files = TRUE, recursive = TRUE)
-```
-
-*Yikes!*
-
-## How does git know a file has changed? {.smaller}
-
--   Does it just look at the modification date?
-
--   NO! It "fingerprints" every file, so it knows when it has changed
-    from the most recent committed version.
-
-    -   Demonstration. Change a file. Save, then undo the change and
-        save again...Git knows the file has been changed back to its
-        "former self"
-
--   SHA-1 hashes.
-
--   You will see things like `ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770`
-    all over in Git-land.
-
--   You can treat them as very specific names for different commits.
-
-## How can I make git ignore certain files?
-
--   The `.gitignore` file!
--   File names (and patterns) in the `.gitignore` file are ignored
-    *recursively* (down into subdirectories), by default.
--   Files won't be ignored if they are already in the repository.
--   Example: `*.html` 
 
 ## Go for it everyone! Git to playing
 

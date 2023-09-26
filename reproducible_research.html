@@ -420,7 +420,7 @@
 <section id="same-thing-happens-for-genomic-metadata" class="slide level2">
 <h2>Same thing happens for genomic metadata</h2>
 
-<img data-src="images/Figure4_LogisticModels.jpg" class="r-stretch quarto-figure-center"><p class="caption">Crandall et al.&nbsp;in review: Figure 4</p></section>
+<img data-src="images/Figure4_LogisticModels.jpg" class="r-stretch quarto-figure-center"><p class="caption">Crandall et al.&nbsp;2023: Figure 4</p></section>
 <section id="data-not-only-need-to-be-easily-available-but-methods-also-need-to-be-reproducible" class="slide level2 smaller">
 <h2>Data not only need to be easily available, but methods also need to be reproducible</h2>
 <ul>
@@ -630,6 +630,256 @@
 </ul></li>
 </ul>
 </section>
+<section id="how-does-git-store-and-keep-track-of-things" class="slide level2">
+<h2>How does git store and keep track of things</h2>
+<ul>
+<li class="fragment">Everything is stored in the <em>invisible</em> .git folder inside the RStudio project.</li>
+<li class="fragment">The “working copy” gets checked out out of there</li>
+<li class="fragment">Committed changes are recorded to the directory</li>
+</ul>
+</section>
+<section id="what-is-inside-of-the-.git-directory" class="slide level2">
+<h2>What is inside of the .git directory?</h2>
+<p>We can use R to list the files.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1] "COMMIT_EDITMSG"                                                 
+  [2] "config"                                                         
+  [3] "description"                                                    
+  [4] "FETCH_HEAD"                                                     
+  [5] "HEAD"                                                           
+  [6] "hooks/applypatch-msg.sample"                                    
+  [7] "hooks/commit-msg.sample"                                        
+  [8] "hooks/fsmonitor-watchman.sample"                                
+  [9] "hooks/post-update.sample"                                       
+ [10] "hooks/pre-applypatch.sample"                                    
+ [11] "hooks/pre-commit.sample"                                        
+ [12] "hooks/pre-merge-commit.sample"                                  
+ [13] "hooks/pre-push.sample"                                          
+ [14] "hooks/pre-rebase.sample"                                        
+ [15] "hooks/pre-receive.sample"                                       
+ [16] "hooks/prepare-commit-msg.sample"                                
+ [17] "hooks/push-to-checkout.sample"                                  
+ [18] "hooks/update.sample"                                            
+ [19] "index"                                                          
+ [20] "info/exclude"                                                   
+ [21] "logs/HEAD"                                                      
+ [22] "logs/refs/heads/main"                                           
+ [23] "logs/refs/remotes/origin/HEAD"                                  
+ [24] "logs/refs/remotes/origin/main"                                  
+ [25] "objects/01/0c4a9f740de46fba09b120c87745f81e379219"              
+ [26] "objects/01/86bec03cdf4764f5dc0e8a08db85cbaa169ded"              
+ [27] "objects/02/b22fafdaa14deefacfd07ba4646b3305264957"              
+ [28] "objects/05/710cb803af44e68b107c56cca1040d21e93381"              
+ [29] "objects/07/f549fb89433f505abf9f1d7a6ee80a7bdea7b6"              
+ [30] "objects/08/765e73984ac6026bb49ff7bcc96db8b21f3b55"              
+ [31] "objects/0a/e2482ef31683ba38831fe6481c9c46aa52f928"              
+ [32] "objects/0e/ee5804f319caa37ebedbfc3d15781f84a7236f"              
+ [33] "objects/10/24720f14fe944bc94eb8503b80fb7978935d49"              
+ [34] "objects/10/78d808cdf738de4950b7db492b9e1cea932da7"              
+ [35] "objects/10/c739a3d513015f61e52b5d978604f9d0d8f291"              
+ [36] "objects/15/34b64befb117c4eb845139e377c306e2040b88"              
+ [37] "objects/15/98c0325c243a2defe9b0ff230098eeb0eb3a97"              
+ [38] "objects/17/0b520061b66e1d24e888836e893e5a865c01bb"              
+ [39] "objects/17/64f14d7dee3cbf2454fb7eef31ac13368f5c58"              
+ [40] "objects/17/eff864d62c819a6395462b1d40d835385c1f5a"              
+ [41] "objects/18/9cf4e940a6c7251160ad4017ff610abe1aef6e"              
+ [42] "objects/18/d4dc7893adb93ee7feb3beb066d63de403e3f1"              
+ [43] "objects/1e/8503475098ee3316f69b57a2253b4e7fb863bd"              
+ [44] "objects/1f/19536c97d36fefc8c2a62b081bf44333b95905"              
+ [45] "objects/1f/3ede9a9f986201addf75b29e70fa8c2a8477f9"              
+ [46] "objects/1f/e7f5cdc14500721c71f68e4ff93f370bda114d"              
+ [47] "objects/22/9ad01e4e7c3d10e46216f67aa550c2ad416295"              
+ [48] "objects/23/e87f52e2961d8d6843009de2318156d92c86f4"              
+ [49] "objects/24/13c5ed113f29bde71e567a10c64d0a38fbc565"              
+ [50] "objects/24/a63a9c30309dbdddd9dcf7186f9c53202daf4c"              
+ [51] "objects/25/023e5fbbdcb1e6aec7449baea525d75ce1f0b0"              
+ [52] "objects/26/2b2cfc8ba24c825f6b64acbe3ca395b7ff2f31"              
+ [53] "objects/28/a42218c9c8deeca5c2155987d12b36339d114b"              
+ [54] "objects/28/c1c4bc730d7a0f9aabfcf2529555ca7ca8b83d"              
+ [55] "objects/28/f0057bd3f9d33a7ace7e366f7ffa4dc210f944"              
+ [56] "objects/29/febd8eae8510136b270c3dce27ea73d83a3b79"              
+ [57] "objects/2b/00dae7f43938d373e59c9b18011de7fd4250d7"              
+ [58] "objects/2c/3f82c3d81552a02d3afa4ff93b53ab286e5c8f"              
+ [59] "objects/2d/669a8c74a1fa6a8ea31bff978ddbc5e72ee0b3"              
+ [60] "objects/2d/9e4c6c5b8608dbb06c3f84adba25cb85ff07e2"              
+ [61] "objects/30/74c3385cfcaf6345ba3cec4df2ce264cfbbac3"              
+ [62] "objects/32/f3ff8fff953f345015451399b4cdc5f53bf573"              
+ [63] "objects/33/21a2167cab036a50997c1ab09cd79230d2f5dd"              
+ [64] "objects/36/2b641043eaa729ef7969d4a66c345d8c3397ff"              
+ [65] "objects/36/7dcf29c0f8e005dcf7bfe52f6dc03b61d43c61"              
+ [66] "objects/36/9af6ba1929828c06045bb6651db6e9c5994bb8"              
+ [67] "objects/36/f765fcfea1174e267e75c146f26ba3e98a0b2b"              
+ [68] "objects/37/2f57b5b80902a0eb6202670cb509eb321be2be"              
+ [69] "objects/39/f3b20fc7fb1755496e83b7ce85620d99326743"              
+ [70] "objects/40/3bc95fbf63f7764afbf55d77f4f7d7e548446a"              
+ [71] "objects/40/447582674a4ad48a862d7fcf9680e603e16a97"              
+ [72] "objects/40/a0a58975e889615c24488e2fabfe6d7491bfec"              
+ [73] "objects/42/6d23b11a7a150333a545c42bf1b0a54be5cfa0"              
+ [74] "objects/44/04da1ed7bff675d1f6e1a7cbff49eaa1ee1c88"              
+ [75] "objects/44/f244b8ff0e3c5e106cc34febb02647387972c0"              
+ [76] "objects/48/8c847aa7bf3f112c7756e93d7b47ef3df9cc95"              
+ [77] "objects/48/cfc221031769516769ef63e4b54fc8b61cb095"              
+ [78] "objects/4a/7e7c011375f5bf1ea9b1391d41d6e53ebbf34b"              
+ [79] "objects/4d/68d14f5ca6db724f1c14c1cef4785da9b53358"              
+ [80] "objects/50/4203d7417497bf47b9851b7d7e9afb646abea3"              
+ [81] "objects/50/45808a94d041c6f6b785bf9c7fcc6ca550d3eb"              
+ [82] "objects/50/9369d0ac1cea7fd393df33d13aa54cab1e9d94"              
+ [83] "objects/50/a2f6435287dec404a8d2107fa21f86ddaf4ba8"              
+ [84] "objects/51/8adb2ad26e74856aac7fdec2e0b341ea8dfadb"              
+ [85] "objects/52/17c95f4816c6b5d4d04b633bc5ebc8f1fc0416"              
+ [86] "objects/54/89fba81ba3ec6f9f5a09a9401e81a8ab09f76f"              
+ [87] "objects/55/3cd2155338050addde46442708220840b901dc"              
+ [88] "objects/57/0ca8e1a74fd6cb35a6ef1a6ad86e5bd1da3025"              
+ [89] "objects/5b/d29fb85484cddbe9bcc71a87f7b9a8b243b9b8"              
+ [90] "objects/5b/fe903d14ac72a2d5cb4f79257b63862904bb5a"              
+ [91] "objects/5e/13a3aac3e1065655e42f784f875fca3a79417b"              
+ [92] "objects/5f/4954314a0608b9a32ba9fe50eab30fa97b0d14"              
+ [93] "objects/61/8136ab12df83b807b9ae22d073b0689e6b4472"              
+ [94] "objects/62/3eb299dc90856f0c4ea8d3df1c68c1e9636af1"              
+ [95] "objects/63/7066cafcca27855ed45776f8cdcc87b1856496"              
+ [96] "objects/64/e0b791f9357f0f04077682f1aafe35dffe167f"              
+ [97] "objects/67/a54546badacb0e357fcdb75569337cac6e4325"              
+ [98] "objects/68/b26ef9b0ff4f039bf9053a5b41e76bccd2265b"              
+ [99] "objects/68/eb65a1877b21f7f7db02b32ce8f5f0665956aa"              
+[100] "objects/6a/7e4e00e4a4a262011f468232392f26562984dc"              
+[101] "objects/6c/9026eb2ddce9d19d49419e2702b46a06efce08"              
+[102] "objects/6c/91ed5b2800cab112ffb34fadbb1b3b57238823"              
+[103] "objects/70/1f64ed543adeb4a93909fb7db24076c7ff0590"              
+[104] "objects/71/3d6cd06c8aa5949637a201a382ee5d2c17f696"              
+[105] "objects/71/9450e761a3022ccb3dc2c1a82a3f17d76eb45b"              
+[106] "objects/73/91a00bde6f00f1bec8fa4f551e300a56a1f3e8"              
+[107] "objects/75/5f7bc4b73d971a5cd882bf4e1066a9e1310eca"              
+[108] "objects/76/b736e28e70c7e1fac7d41d5a13b9d3031f8581"              
+[109] "objects/7b/6fa9e1de542cfb11501184b13addf4fffdc921"              
+[110] "objects/7b/bf0722e206236a1deeadad4074026b88791181"              
+[111] "objects/7d/12be7cbbd38a78c0eb41f4b9b3b5ced845c986"              
+[112] "objects/7d/c1a13df4d30eb672a9d78a04dd7f5da40c76bb"              
+[113] "objects/7e/8c2d2bb415d576f49c8faea365d8a90f04614f"              
+[114] "objects/7f/ec2e37b2993540369b5322a4a0ed9f6cc67d12"              
+[115] "objects/80/b3c20fd10978ac431dbffd718a39c5f40be042"              
+[116] "objects/81/17a4006e63621d735764ad2d51daa41a8ed605"              
+[117] "objects/81/5b926d1da493ff851a278f320d82d2b36c83de"              
+[118] "objects/85/1cc8f7de2b5e76fbb442878aff347c5c3c1277"              
+[119] "objects/85/70d176f8b37ad494f3bc720fc8294924530591"              
+[120] "objects/86/e545b9331370a8aa9fc754fab9c4d8c88274d7"              
+[121] "objects/87/47c70192f2083dcb31ba867b114c4d9042e3de"              
+[122] "objects/8c/382dec8bab4c5703f7c71c094b99f15e404465"              
+[123] "objects/8c/6a621eb21b4141039c6c917db54de764c458a3"              
+[124] "objects/8c/ff794eacce8c0d9f498fc3b1821cf0f1bfae09"              
+[125] "objects/90/812e491f60a8d6b5e8dbbd922a65722b8bad3a"              
+[126] "objects/91/a3de8f8a02be28c891016f018298fad54d56d6"              
+[127] "objects/95/42fa1500bb51075c5298789adbe603d8de462a"              
+[128] "objects/95/4b05932299fcaef9968c71358d1a160fee6f1b"              
+[129] "objects/97/d748af7cfc15afe7c7c62d03694e751f501ed0"              
+[130] "objects/99/534bc25abb95a11c6ea7f681740c5970a89367"              
+[131] "objects/99/9f5de7d36964c86c2a1f905d595c678d15f5fa"              
+[132] "objects/9a/581f31128b6e10a2c235b61eadfbcd37d7e6b0"              
+[133] "objects/9e/4b7e1cf0ef7bf662c3f57862cff76ac2a7e7a8"              
+[134] "objects/9e/f566a9eebe03f0f4fa739e9c7e068db9b9199f"              
+[135] "objects/9f/7f017f6c9fbd57f21272f40892c282fe2e005e"              
+[136] "objects/a0/f2f464b07cb0ae3b5c373acdc8526ae3a1786b"              
+[137] "objects/a4/7c8e25469aac6f462df675a6e3cbfbf715ca6d"              
+[138] "objects/a4/83446e5d772ab112af39cfa5f71b26c1d78205"              
+[139] "objects/a6/5cc5702e86d17bd02c61f2f30ee31fa26e1296"              
+[140] "objects/a6/f47462d6295550e2dec553614aa16e21ce685d"              
+[141] "objects/a6/f7240c4da5dcb6c134907661f4dcd3a072288e"              
+[142] "objects/a9/5fcdf8638cffceb5edf23300684d2f05e709ab"              
+[143] "objects/ac/135a67d2007564352352d7b984f8bafd3fabd5"              
+[144] "objects/ad/7564e3e1e800396a1b597c73f5aeae7306b639"              
+[145] "objects/ad/a174e96b13d465609a9f566dd3fd6f9ce63688"              
+[146] "objects/ae/7b3edf6528fb0c91b69e5dfa03bb6de72c9291"              
+[147] "objects/ae/d56a2f9e5ad4b9d84c46734d3e9ebddcef36b0"              
+[148] "objects/af/47657815d05becdaf8308a0cc9657f5aa326bd"              
+[149] "objects/b0/568c260c2a0a2d17b71db16c127ef8ae998789"              
+[150] "objects/b1/0f65549525e03e8dd73a72a87aa848ac11da1c"              
+[151] "objects/b9/e58c5e61070439cebd54042000ae14b2365cfa"              
+[152] "objects/b9/f1a09e240d7c8f7022d29e702859e10da5a8a0"              
+[153] "objects/ba/0624b584850e31b6ffd7f359d2f05ce41a187e"              
+[154] "objects/bb/f52e93b5dc0b6a76e6e5604509f5d610abb312"              
+[155] "objects/bc/4a2d82fc2898ca836f49c69be89aadaf8ea15f"              
+[156] "objects/bc/746a8952dc080a92ad1157f4280792168b1b87"              
+[157] "objects/bd/35950eeb8e98b1c9a2b52fa2b1a4f5c391c02f"              
+[158] "objects/c2/2a59d14b07d0eacb9a3fc8135650584f5efd83"              
+[159] "objects/c2/8a86a78bebf693c3229a01c166b3c615c9bb44"              
+[160] "objects/c2/dfa5439aefe24d7c09fb240427b10802b069a8"              
+[161] "objects/c5/601d14415d208f658cc98423a93e3780783f2e"              
+[162] "objects/c6/b2ecdec52c963f3303863aa8f93a010d86a5e7"              
+[163] "objects/c8/959054c5e1331ea7170c3d94c487563782269a"              
+[164] "objects/ca/78faef0bc7ff49380ad85c4f37523e9fa37ee4"              
+[165] "objects/cb/855976b8c0e1d36da826163758b8f9db4dd2c7"              
+[166] "objects/cb/b99a7196a266cb4e958f2bfc031bf478422080"              
+[167] "objects/cb/fb26918f97e5a3e92c38d3007c5af47fd42e32"              
+[168] "objects/cc/691d63370310b4d9bc35c825e7eea766bd60f9"              
+[169] "objects/ce/fbd50f29c9a6a3bc2edf01dbea72b3e3eb1633"              
+[170] "objects/d1/54a94b4f36b0154b4dbad6c626a760c1d1b238"              
+[171] "objects/d1/f7cdd847ae5544713e15a5014ecf208df0f0c9"              
+[172] "objects/d2/23b29197c549e12c83368d039f791fd74c3f93"              
+[173] "objects/d7/727d52a5e98ea62dab46fef3f67134b89058ba"              
+[174] "objects/d7/b3db921eaa78bbe8d08dfa381b45a5b932eaea"              
+[175] "objects/d9/a8b92d2de50decb29dea06ed1b0a2d00b1e6f5"              
+[176] "objects/db/3f803b0b17fb7a08c9c34463826e01736be63c"              
+[177] "objects/db/f570a9979226ae7cb1b50c78cd31dd689d2bdb"              
+[178] "objects/de/ae075742bf13ce55571c3aae4f007869e401b3"              
+[179] "objects/df/9db09000aac884dd45e7a676c769a5570d144f"              
+[180] "objects/e3/772c2fcd9f1454a5c05dedea048f69c6716fbd"              
+[181] "objects/e3/d5a0665fab25d22c48ddfb21bb62c863c85918"              
+[182] "objects/e3/ec4776ac6fc3762280f59a70b9983822f5cf0f"              
+[183] "objects/e5/83e4eb2bf8118c381efc8e6619a6f34e63544b"              
+[184] "objects/e7/20717c6313b596e401e561c9396757f3ed294e"              
+[185] "objects/ec/43a295624526bc34e759007cc5222841dcbff3"              
+[186] "objects/ed/f913e6c7a5732808e66ee5af2d3d5c7c1c5ca9"              
+[187] "objects/f0/01858c375639ce61f5363e1998d9bb699caaf1"              
+[188] "objects/f1/a075a50e0cfecfbce29df15fde5766832c5ff9"              
+[189] "objects/f2/36e0d2205ee55904ad9420b116ea79a2f812ca"              
+[190] "objects/f2/6dd64a111ff8804b4ddfc3030363eaf0af7256"              
+[191] "objects/f2/bedd85bbf977d44a3f75cccb0d85f7eaece7d4"              
+[192] "objects/f2/f009e459298ec8cd6f2fdea8d8d4a8626ae436"              
+[193] "objects/f4/1c339cc64d35b98bc38b0315b70716f62f6f38"              
+[194] "objects/f6/2cd7ba4a791cccad8b3ba40b15e023803be5a3"              
+[195] "objects/f6/52cede18870f072a0791687314a5dbda075455"              
+[196] "objects/f7/0c2991ee48c22d5e65b64f9799686ae6c33a6e"              
+[197] "objects/f8/6b0264fc1c77f39facb3f8c195cff7f1585862"              
+[198] "objects/f8/e48185fbfce6d497c89780b654fb96f61db74d"              
+[199] "objects/fc/e61de9cf42f8342f0812e1e66ff3a111780093"              
+[200] "objects/fe/d89a3c075ce48a80f7214f9e27cf047f953245"              
+[201] "objects/pack/pack-9f7beb2473febaafac0713e3ea30f0f90291b09f.idx" 
+[202] "objects/pack/pack-9f7beb2473febaafac0713e3ea30f0f90291b09f.pack"
+[203] "objects/pack/pack-d980ada96492215610b07587182d90a772b5f8fe.idx" 
+[204] "objects/pack/pack-d980ada96492215610b07587182d90a772b5f8fe.pack"
+[205] "objects/pack/pack-e2d4bf747209c0752b3546e01b6e02188599db5b.idx" 
+[206] "objects/pack/pack-e2d4bf747209c0752b3546e01b6e02188599db5b.pack"
+[207] "ORIG_HEAD"                                                      
+[208] "packed-refs"                                                    
+[209] "refs/heads/main"                                                
+[210] "refs/remotes/origin/HEAD"                                       
+[211] "refs/remotes/origin/main"                                       </code></pre>
+</div>
+</div>
+<p><em>Yikes!</em></p>
+</section>
+<section id="how-does-git-know-a-file-has-changed" class="slide level2 smaller">
+<h2>How does git know a file has changed?</h2>
+<ul>
+<li class="fragment"><p>Does it just look at the modification date?</p></li>
+<li class="fragment"><p>NO! It “fingerprints” every file, so it knows when it has changed from the most recent committed version.</p>
+<ul>
+<li class="fragment">Demonstration. Change a file. Save, then undo the change and save again…Git knows the file has been changed back to its “former self”</li>
+</ul></li>
+<li class="fragment"><p>SHA-1 hashes.</p></li>
+<li class="fragment"><p>You will see things like <code>ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770</code> all over in Git-land.</p></li>
+<li class="fragment"><p>You can treat them as very specific names for different commits.</p></li>
+</ul>
+</section>
+<section id="how-can-i-make-git-ignore-certain-files" class="slide level2">
+<h2>How can I make git ignore certain files?</h2>
+<ul>
+<li class="fragment">The <code>.gitignore</code> file!</li>
+<li class="fragment">File names (and patterns) in the <code>.gitignore</code> file are ignored <em>recursively</em> (down into subdirectories), by default.</li>
+<li class="fragment">Files won’t be ignored if they are already in the repository.</li>
+<li class="fragment">Example: <code>*.html</code></li>
+</ul>
+</section>
 <section id="github-and-others-is-a-distributed-version-control-system-dvcs" class="slide level2 smaller">
 <h2>GitHub (and others) is a distributed version control system (DVCS)</h2>
 <ul>
@@ -716,18 +966,18 @@
 <section id="do-this-in-github" class="slide level2">
 <h2>Do this in GitHub</h2>
 <ol type="1">
-<li class="fragment">Go to <a href="https://github.com/ericcrandall/reproducible_research" class="uri">https://github.com/ericcrandall/reproducible_research</a></li>
+<li class="fragment">Go to <a href="https://github.com/ericcrandall/reproducible_research_practical" class="uri">https://github.com/ericcrandall/reproducible_research_practical</a></li>
 <li class="fragment">Click “Fork” in the upper right-hand corner and follow dialogue prompts to create a forked repository in your account</li>
 </ol>
 </section>
-<section id="do-this-in-rstudio" class="slide level2 smaller">
+<section id="do-this-in-rstudio" class="slide level2">
 <h2>Do This in RStudio</h2>
 <ol type="1">
 <li class="fragment"><p>Select File -&gt; New Project</p></li>
 <li class="fragment"><p>Create project from: Choose “Version Control” {.smaller}</p>
 <ol type="1">
 <li class="fragment">Choose “Git”</li>
-<li class="fragment">Input the url of this repository 1.https://github.com/<em>yourusername</em>/reproducible_research</li>
+<li class="fragment">Input the url of this repository 1.https://github.com/<em>yourusername</em>/reproducible_research_practical</li>
 <li class="fragment">and put it somewhere</li>
 <li class="fragment">I suggest a directory coming off your home directory called <code>github</code>.</li>
 <li class="fragment">(browse to where you want to put it in the “create project as subdirectory of:”)</li>
@@ -756,12 +1006,12 @@
 <li class="fragment"><p>You can click the check box next to various files to stage them to be part of a commit.</p>
 <ul>
 <li class="fragment">I generally stage all changes for every commit</li>
-<li class="fragment">But one could consider of being more strategic…</li>
+<li class="fragment">But one could consider being more strategic…</li>
 <li class="fragment">At the command line, staging or adding all <em>changed</em> files to a commit is achieved by:</li>
 </ul></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">git</span> add .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">git</span> add .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="the-commit-window" class="slide level2">
@@ -792,13 +1042,13 @@
 <li class="fragment"><p>At the command line, a commit is achieved thusly:</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"my commit message"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"my commit message"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="a-commit-analogy" class="slide level2 smaller">
 <h2>A commit analogy</h2>
 
-<img data-src="https://www.mountaineers.org/books/books/rock-climbing-anchors-2nd-edition-a-comprehensive-guide/images/rca_gal2/@@images/3164c24c-0e97-4a08-905d-2e3380701eff.jpeg" class="r-stretch"><blockquote>
+<img data-src="https://images.squarespace-cdn.com/content/v1/55830fd9e4b0ec758c892f81/1502123872645-1TDC1C42ZKSETL32TGPN/image-asset.jpeg?format=2500w" class="r-stretch"><blockquote>
 <p>Using a Git commit is like using anchors and other protection when climbing. If you’re crossing a dangerous rock face you want to make sure you’ve used protection to catch you if you fall. Commits play a similar role: if you make a mistake, you can’t fall past the previous commit. Coding without commits is like free-climbing: you can travel much faster in the short-term, but in the long-term the chances of catastrophic failure are high! Like rock climbing protection, you want to be judicious in your use of commits. Committing too frequently will slow your progress; use more commits when you’re in uncertain or dangerous territory. Commits are also helpful to others, because they show your journey, not just the destination.</p>
 </blockquote>
 <p>–Hadley Wickham (PBUH), 2015</p>
@@ -820,7 +1070,7 @@
 </ul></li>
 </ul>
 </section>
-<section id="dealing-with-merge-conflicts" class="slide level2 smaller">
+<section id="dealing-with-merge-conflicts" class="slide level2">
 <h2>Dealing with Merge Conflicts</h2>
 <ul>
 <li class="fragment"><p>There you are, working away, when you try to push a commit and get:</p>
@@ -833,6 +1083,11 @@ hint: not have locally. This is usually caused by another repository pushing
 hint: to the same ref. You may want to first integrate the remote changes
 hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code></pre></li>
+</ul>
+</section>
+<section id="dealing-with-merge-conflicts-1" class="slide level2">
+<h2>Dealing with Merge Conflicts</h2>
+<ul>
 <li class="fragment"><p>This means that someone (you on another computer or a collaborator), has changed the same file(s) that you have changed. In the abstract, this is the state on GitHub:</p>
 <pre><code>A -- B -- C (on GitHub)</code></pre>
 <p>And this is your local state:</p>
@@ -840,7 +1095,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code
 <li class="fragment"><p>This situation is best avoided, either by <em>pulling often</em>, communication with your collaborator or through the use of branches (coming up).</p></li>
 </ul>
 </section>
-<section id="dealing-with-merge-conflicts-1" class="slide level2 smaller">
+<section id="dealing-with-merge-conflicts-2" class="slide level2 smaller">
 <h2>Dealing with Merge Conflicts</h2>
 <ul>
 <li class="fragment">So you try to pull and you get: <img data-src="images/pull_rejection.png"></li>
@@ -851,23 +1106,23 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code
 </ul></li>
 </ul>
 </section>
-<section id="dealing-with-merge-conflicts-2" class="slide level2 smaller">
+<section id="dealing-with-merge-conflicts-3" class="slide level2 smaller">
 <h2>Dealing with Merge Conflicts</h2>
 <ul>
 <li class="fragment">Stashing basically lets you punt</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">git</span> stash save</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">git</span> pull</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="fu">git</span> stash pop <span class="co"># the merge conflict will re um emerge at this point</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">git</span> stash save</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">git</span> pull</span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">git</span> stash pop <span class="co"># the merge conflict will re um emerge at this point</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li class="fragment">Commit your conflicting changes and then deal with the merge conflict.</li>
-<li class="fragment">If you’re lucky, you were editing, different parts of the file. In this case, git will figure this out, and just auto-merge for you. <img data-src="images/auto_merge.png"></li>
+<li class="fragment">If you’re lucky, you were editing different parts of the file. In this case, git will figure this out, and just auto-merge for you. <img data-src="images/auto_merge.png"></li>
 <li class="fragment">If not, then git will highlight the areas of conflict for you, allowing you to fix the problem manually (we’ll do this together)</li>
 </ul>
 </section>
-<section id="dealing-with-merge-conflicts-3" class="slide level2">
+<section id="dealing-with-merge-conflicts-4" class="slide level2">
 <h2>Dealing with Merge Conflicts</h2>
 <ul>
 <li class="fragment">If not, then git will highlight the areas of conflict for you, allowing you to fix the problem manually (we’ll do this together)</li>
@@ -910,248 +1165,6 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</code
 <pre><code>git branch fix_issue_105
 git checkout fix_issue_105</code></pre>
 <p>Then issue a pull request.</p>
-</section>
-<section id="how-does-git-store-and-keep-track-of-things" class="slide level2">
-<h2>How does git store and keep track of things</h2>
-<ul>
-<li class="fragment">Everything is stored in the .git folder inside the RStudio project.</li>
-<li class="fragment">The “working copy” gets checked out out of there</li>
-<li class="fragment">Committed changes are recorded to the directory</li>
-</ul>
-</section>
-<section id="what-is-inside-of-the-.git-directory" class="slide level2">
-<h2>What is inside of the .git directory?</h2>
-<p>We can use R to list the files.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  [1] "AUTO_MERGE"                                                     
-  [2] "COMMIT_EDITMSG"                                                 
-  [3] "config"                                                         
-  [4] "description"                                                    
-  [5] "FETCH_HEAD"                                                     
-  [6] "HEAD"                                                           
-  [7] "hooks/applypatch-msg.sample"                                    
-  [8] "hooks/commit-msg.sample"                                        
-  [9] "hooks/fsmonitor-watchman.sample"                                
- [10] "hooks/post-update.sample"                                       
- [11] "hooks/pre-applypatch.sample"                                    
- [12] "hooks/pre-commit.sample"                                        
- [13] "hooks/pre-merge-commit.sample"                                  
- [14] "hooks/pre-push.sample"                                          
- [15] "hooks/pre-rebase.sample"                                        
- [16] "hooks/pre-receive.sample"                                       
- [17] "hooks/prepare-commit-msg.sample"                                
- [18] "hooks/push-to-checkout.sample"                                  
- [19] "hooks/update.sample"                                            
- [20] "index"                                                          
- [21] "info/exclude"                                                   
- [22] "logs/HEAD"                                                      
- [23] "logs/refs/heads/main"                                           
- [24] "logs/refs/remotes/origin/HEAD"                                  
- [25] "logs/refs/remotes/origin/main"                                  
- [26] "objects/01/0c4a9f740de46fba09b120c87745f81e379219"              
- [27] "objects/01/86bec03cdf4764f5dc0e8a08db85cbaa169ded"              
- [28] "objects/02/b22fafdaa14deefacfd07ba4646b3305264957"              
- [29] "objects/05/710cb803af44e68b107c56cca1040d21e93381"              
- [30] "objects/07/f549fb89433f505abf9f1d7a6ee80a7bdea7b6"              
- [31] "objects/08/765e73984ac6026bb49ff7bcc96db8b21f3b55"              
- [32] "objects/0a/e2482ef31683ba38831fe6481c9c46aa52f928"              
- [33] "objects/0e/ee5804f319caa37ebedbfc3d15781f84a7236f"              
- [34] "objects/10/24720f14fe944bc94eb8503b80fb7978935d49"              
- [35] "objects/10/78d808cdf738de4950b7db492b9e1cea932da7"              
- [36] "objects/10/c739a3d513015f61e52b5d978604f9d0d8f291"              
- [37] "objects/15/34b64befb117c4eb845139e377c306e2040b88"              
- [38] "objects/15/98c0325c243a2defe9b0ff230098eeb0eb3a97"              
- [39] "objects/17/0b520061b66e1d24e888836e893e5a865c01bb"              
- [40] "objects/17/64f14d7dee3cbf2454fb7eef31ac13368f5c58"              
- [41] "objects/17/eff864d62c819a6395462b1d40d835385c1f5a"              
- [42] "objects/18/9cf4e940a6c7251160ad4017ff610abe1aef6e"              
- [43] "objects/18/d4dc7893adb93ee7feb3beb066d63de403e3f1"              
- [44] "objects/1e/8503475098ee3316f69b57a2253b4e7fb863bd"              
- [45] "objects/1f/19536c97d36fefc8c2a62b081bf44333b95905"              
- [46] "objects/1f/3ede9a9f986201addf75b29e70fa8c2a8477f9"              
- [47] "objects/1f/e7f5cdc14500721c71f68e4ff93f370bda114d"              
- [48] "objects/22/9ad01e4e7c3d10e46216f67aa550c2ad416295"              
- [49] "objects/23/e87f52e2961d8d6843009de2318156d92c86f4"              
- [50] "objects/24/13c5ed113f29bde71e567a10c64d0a38fbc565"              
- [51] "objects/24/a63a9c30309dbdddd9dcf7186f9c53202daf4c"              
- [52] "objects/25/023e5fbbdcb1e6aec7449baea525d75ce1f0b0"              
- [53] "objects/26/2b2cfc8ba24c825f6b64acbe3ca395b7ff2f31"              
- [54] "objects/28/a42218c9c8deeca5c2155987d12b36339d114b"              
- [55] "objects/28/c1c4bc730d7a0f9aabfcf2529555ca7ca8b83d"              
- [56] "objects/28/f0057bd3f9d33a7ace7e366f7ffa4dc210f944"              
- [57] "objects/29/febd8eae8510136b270c3dce27ea73d83a3b79"              
- [58] "objects/2b/00dae7f43938d373e59c9b18011de7fd4250d7"              
- [59] "objects/2c/3f82c3d81552a02d3afa4ff93b53ab286e5c8f"              
- [60] "objects/2d/669a8c74a1fa6a8ea31bff978ddbc5e72ee0b3"              
- [61] "objects/2d/9e4c6c5b8608dbb06c3f84adba25cb85ff07e2"              
- [62] "objects/30/74c3385cfcaf6345ba3cec4df2ce264cfbbac3"              
- [63] "objects/32/f3ff8fff953f345015451399b4cdc5f53bf573"              
- [64] "objects/33/21a2167cab036a50997c1ab09cd79230d2f5dd"              
- [65] "objects/36/2b641043eaa729ef7969d4a66c345d8c3397ff"              
- [66] "objects/36/7dcf29c0f8e005dcf7bfe52f6dc03b61d43c61"              
- [67] "objects/36/9af6ba1929828c06045bb6651db6e9c5994bb8"              
- [68] "objects/36/f765fcfea1174e267e75c146f26ba3e98a0b2b"              
- [69] "objects/37/2f57b5b80902a0eb6202670cb509eb321be2be"              
- [70] "objects/39/f3b20fc7fb1755496e83b7ce85620d99326743"              
- [71] "objects/40/3bc95fbf63f7764afbf55d77f4f7d7e548446a"              
- [72] "objects/40/447582674a4ad48a862d7fcf9680e603e16a97"              
- [73] "objects/40/a0a58975e889615c24488e2fabfe6d7491bfec"              
- [74] "objects/42/6d23b11a7a150333a545c42bf1b0a54be5cfa0"              
- [75] "objects/44/04da1ed7bff675d1f6e1a7cbff49eaa1ee1c88"              
- [76] "objects/44/f244b8ff0e3c5e106cc34febb02647387972c0"              
- [77] "objects/48/8c847aa7bf3f112c7756e93d7b47ef3df9cc95"              
- [78] "objects/48/cfc221031769516769ef63e4b54fc8b61cb095"              
- [79] "objects/4a/7e7c011375f5bf1ea9b1391d41d6e53ebbf34b"              
- [80] "objects/4d/68d14f5ca6db724f1c14c1cef4785da9b53358"              
- [81] "objects/50/4203d7417497bf47b9851b7d7e9afb646abea3"              
- [82] "objects/50/45808a94d041c6f6b785bf9c7fcc6ca550d3eb"              
- [83] "objects/50/9369d0ac1cea7fd393df33d13aa54cab1e9d94"              
- [84] "objects/50/a2f6435287dec404a8d2107fa21f86ddaf4ba8"              
- [85] "objects/51/8adb2ad26e74856aac7fdec2e0b341ea8dfadb"              
- [86] "objects/52/17c95f4816c6b5d4d04b633bc5ebc8f1fc0416"              
- [87] "objects/54/89fba81ba3ec6f9f5a09a9401e81a8ab09f76f"              
- [88] "objects/55/3cd2155338050addde46442708220840b901dc"              
- [89] "objects/57/0ca8e1a74fd6cb35a6ef1a6ad86e5bd1da3025"              
- [90] "objects/5b/d29fb85484cddbe9bcc71a87f7b9a8b243b9b8"              
- [91] "objects/5e/13a3aac3e1065655e42f784f875fca3a79417b"              
- [92] "objects/5f/4954314a0608b9a32ba9fe50eab30fa97b0d14"              
- [93] "objects/61/8136ab12df83b807b9ae22d073b0689e6b4472"              
- [94] "objects/62/3eb299dc90856f0c4ea8d3df1c68c1e9636af1"              
- [95] "objects/63/7066cafcca27855ed45776f8cdcc87b1856496"              
- [96] "objects/64/e0b791f9357f0f04077682f1aafe35dffe167f"              
- [97] "objects/67/a54546badacb0e357fcdb75569337cac6e4325"              
- [98] "objects/68/b26ef9b0ff4f039bf9053a5b41e76bccd2265b"              
- [99] "objects/68/eb65a1877b21f7f7db02b32ce8f5f0665956aa"              
-[100] "objects/6a/7e4e00e4a4a262011f468232392f26562984dc"              
-[101] "objects/6c/9026eb2ddce9d19d49419e2702b46a06efce08"              
-[102] "objects/6c/91ed5b2800cab112ffb34fadbb1b3b57238823"              
-[103] "objects/70/1f64ed543adeb4a93909fb7db24076c7ff0590"              
-[104] "objects/71/3d6cd06c8aa5949637a201a382ee5d2c17f696"              
-[105] "objects/71/9450e761a3022ccb3dc2c1a82a3f17d76eb45b"              
-[106] "objects/73/91a00bde6f00f1bec8fa4f551e300a56a1f3e8"              
-[107] "objects/76/b736e28e70c7e1fac7d41d5a13b9d3031f8581"              
-[108] "objects/7b/6fa9e1de542cfb11501184b13addf4fffdc921"              
-[109] "objects/7b/bf0722e206236a1deeadad4074026b88791181"              
-[110] "objects/7d/12be7cbbd38a78c0eb41f4b9b3b5ced845c986"              
-[111] "objects/7d/c1a13df4d30eb672a9d78a04dd7f5da40c76bb"              
-[112] "objects/7e/8c2d2bb415d576f49c8faea365d8a90f04614f"              
-[113] "objects/7f/ec2e37b2993540369b5322a4a0ed9f6cc67d12"              
-[114] "objects/80/b3c20fd10978ac431dbffd718a39c5f40be042"              
-[115] "objects/81/17a4006e63621d735764ad2d51daa41a8ed605"              
-[116] "objects/81/5b926d1da493ff851a278f320d82d2b36c83de"              
-[117] "objects/85/1cc8f7de2b5e76fbb442878aff347c5c3c1277"              
-[118] "objects/85/70d176f8b37ad494f3bc720fc8294924530591"              
-[119] "objects/86/e545b9331370a8aa9fc754fab9c4d8c88274d7"              
-[120] "objects/87/47c70192f2083dcb31ba867b114c4d9042e3de"              
-[121] "objects/8c/382dec8bab4c5703f7c71c094b99f15e404465"              
-[122] "objects/8c/6a621eb21b4141039c6c917db54de764c458a3"              
-[123] "objects/90/812e491f60a8d6b5e8dbbd922a65722b8bad3a"              
-[124] "objects/91/a3de8f8a02be28c891016f018298fad54d56d6"              
-[125] "objects/95/4b05932299fcaef9968c71358d1a160fee6f1b"              
-[126] "objects/97/d748af7cfc15afe7c7c62d03694e751f501ed0"              
-[127] "objects/99/534bc25abb95a11c6ea7f681740c5970a89367"              
-[128] "objects/99/9f5de7d36964c86c2a1f905d595c678d15f5fa"              
-[129] "objects/9a/581f31128b6e10a2c235b61eadfbcd37d7e6b0"              
-[130] "objects/9e/4b7e1cf0ef7bf662c3f57862cff76ac2a7e7a8"              
-[131] "objects/9e/f566a9eebe03f0f4fa739e9c7e068db9b9199f"              
-[132] "objects/9f/7f017f6c9fbd57f21272f40892c282fe2e005e"              
-[133] "objects/a0/f2f464b07cb0ae3b5c373acdc8526ae3a1786b"              
-[134] "objects/a4/7c8e25469aac6f462df675a6e3cbfbf715ca6d"              
-[135] "objects/a4/83446e5d772ab112af39cfa5f71b26c1d78205"              
-[136] "objects/a6/5cc5702e86d17bd02c61f2f30ee31fa26e1296"              
-[137] "objects/a6/f47462d6295550e2dec553614aa16e21ce685d"              
-[138] "objects/a6/f7240c4da5dcb6c134907661f4dcd3a072288e"              
-[139] "objects/a9/5fcdf8638cffceb5edf23300684d2f05e709ab"              
-[140] "objects/ac/135a67d2007564352352d7b984f8bafd3fabd5"              
-[141] "objects/ad/7564e3e1e800396a1b597c73f5aeae7306b639"              
-[142] "objects/ad/a174e96b13d465609a9f566dd3fd6f9ce63688"              
-[143] "objects/ae/7b3edf6528fb0c91b69e5dfa03bb6de72c9291"              
-[144] "objects/ae/d56a2f9e5ad4b9d84c46734d3e9ebddcef36b0"              
-[145] "objects/af/47657815d05becdaf8308a0cc9657f5aa326bd"              
-[146] "objects/b0/568c260c2a0a2d17b71db16c127ef8ae998789"              
-[147] "objects/b1/0f65549525e03e8dd73a72a87aa848ac11da1c"              
-[148] "objects/b9/e58c5e61070439cebd54042000ae14b2365cfa"              
-[149] "objects/b9/f1a09e240d7c8f7022d29e702859e10da5a8a0"              
-[150] "objects/ba/0624b584850e31b6ffd7f359d2f05ce41a187e"              
-[151] "objects/bb/f52e93b5dc0b6a76e6e5604509f5d610abb312"              
-[152] "objects/bc/4a2d82fc2898ca836f49c69be89aadaf8ea15f"              
-[153] "objects/bc/746a8952dc080a92ad1157f4280792168b1b87"              
-[154] "objects/bd/35950eeb8e98b1c9a2b52fa2b1a4f5c391c02f"              
-[155] "objects/c2/8a86a78bebf693c3229a01c166b3c615c9bb44"              
-[156] "objects/c2/dfa5439aefe24d7c09fb240427b10802b069a8"              
-[157] "objects/c5/601d14415d208f658cc98423a93e3780783f2e"              
-[158] "objects/c6/b2ecdec52c963f3303863aa8f93a010d86a5e7"              
-[159] "objects/c8/959054c5e1331ea7170c3d94c487563782269a"              
-[160] "objects/ca/78faef0bc7ff49380ad85c4f37523e9fa37ee4"              
-[161] "objects/cb/855976b8c0e1d36da826163758b8f9db4dd2c7"              
-[162] "objects/cb/b99a7196a266cb4e958f2bfc031bf478422080"              
-[163] "objects/cb/fb26918f97e5a3e92c38d3007c5af47fd42e32"              
-[164] "objects/cc/691d63370310b4d9bc35c825e7eea766bd60f9"              
-[165] "objects/ce/fbd50f29c9a6a3bc2edf01dbea72b3e3eb1633"              
-[166] "objects/d1/54a94b4f36b0154b4dbad6c626a760c1d1b238"              
-[167] "objects/d1/f7cdd847ae5544713e15a5014ecf208df0f0c9"              
-[168] "objects/d2/23b29197c549e12c83368d039f791fd74c3f93"              
-[169] "objects/d7/727d52a5e98ea62dab46fef3f67134b89058ba"              
-[170] "objects/d9/a8b92d2de50decb29dea06ed1b0a2d00b1e6f5"              
-[171] "objects/db/3f803b0b17fb7a08c9c34463826e01736be63c"              
-[172] "objects/db/f570a9979226ae7cb1b50c78cd31dd689d2bdb"              
-[173] "objects/de/ae075742bf13ce55571c3aae4f007869e401b3"              
-[174] "objects/df/9db09000aac884dd45e7a676c769a5570d144f"              
-[175] "objects/e3/772c2fcd9f1454a5c05dedea048f69c6716fbd"              
-[176] "objects/e3/ec4776ac6fc3762280f59a70b9983822f5cf0f"              
-[177] "objects/e5/83e4eb2bf8118c381efc8e6619a6f34e63544b"              
-[178] "objects/e7/20717c6313b596e401e561c9396757f3ed294e"              
-[179] "objects/ec/43a295624526bc34e759007cc5222841dcbff3"              
-[180] "objects/ed/f913e6c7a5732808e66ee5af2d3d5c7c1c5ca9"              
-[181] "objects/f0/01858c375639ce61f5363e1998d9bb699caaf1"              
-[182] "objects/f2/36e0d2205ee55904ad9420b116ea79a2f812ca"              
-[183] "objects/f2/6dd64a111ff8804b4ddfc3030363eaf0af7256"              
-[184] "objects/f2/bedd85bbf977d44a3f75cccb0d85f7eaece7d4"              
-[185] "objects/f2/f009e459298ec8cd6f2fdea8d8d4a8626ae436"              
-[186] "objects/f6/2cd7ba4a791cccad8b3ba40b15e023803be5a3"              
-[187] "objects/f6/52cede18870f072a0791687314a5dbda075455"              
-[188] "objects/f7/0c2991ee48c22d5e65b64f9799686ae6c33a6e"              
-[189] "objects/f8/6b0264fc1c77f39facb3f8c195cff7f1585862"              
-[190] "objects/f8/e48185fbfce6d497c89780b654fb96f61db74d"              
-[191] "objects/fc/e61de9cf42f8342f0812e1e66ff3a111780093"              
-[192] "objects/fe/d89a3c075ce48a80f7214f9e27cf047f953245"              
-[193] "objects/pack/pack-9f7beb2473febaafac0713e3ea30f0f90291b09f.idx" 
-[194] "objects/pack/pack-9f7beb2473febaafac0713e3ea30f0f90291b09f.pack"
-[195] "objects/pack/pack-d980ada96492215610b07587182d90a772b5f8fe.idx" 
-[196] "objects/pack/pack-d980ada96492215610b07587182d90a772b5f8fe.pack"
-[197] "objects/pack/pack-e2d4bf747209c0752b3546e01b6e02188599db5b.idx" 
-[198] "objects/pack/pack-e2d4bf747209c0752b3546e01b6e02188599db5b.pack"
-[199] "ORIG_HEAD"                                                      
-[200] "packed-refs"                                                    
-[201] "refs/heads/main"                                                
-[202] "refs/remotes/origin/HEAD"                                       
-[203] "refs/remotes/origin/main"                                       </code></pre>
-</div>
-</div>
-<p><em>Yikes!</em></p>
-</section>
-<section id="how-does-git-know-a-file-has-changed" class="slide level2 smaller">
-<h2>How does git know a file has changed?</h2>
-<ul>
-<li class="fragment"><p>Does it just look at the modification date?</p></li>
-<li class="fragment"><p>NO! It “fingerprints” every file, so it knows when it has changed from the most recent committed version.</p>
-<ul>
-<li class="fragment">Demonstration. Change a file. Save, then undo the change and save again…Git knows the file has been changed back to its “former self”</li>
-</ul></li>
-<li class="fragment"><p>SHA-1 hashes.</p></li>
-<li class="fragment"><p>You will see things like <code>ed00c10ae6cf7bcc35d335d2edad7e71bc0f6770</code> all over in Git-land.</p></li>
-<li class="fragment"><p>You can treat them as very specific names for different commits.</p></li>
-</ul>
-</section>
-<section id="how-can-i-make-git-ignore-certain-files" class="slide level2">
-<h2>How can I make git ignore certain files?</h2>
-<ul>
-<li class="fragment">The <code>.gitignore</code> file!</li>
-<li class="fragment">File names (and patterns) in the <code>.gitignore</code> file are ignored <em>recursively</em> (down into subdirectories), by default.</li>
-<li class="fragment">Files won’t be ignored if they are already in the repository.</li>
-<li class="fragment">Example: <code>*.html</code></li>
-</ul>
 </section>
 <section id="go-for-it-everyone-git-to-playing" class="slide level2">
 <h2>Go for it everyone! Git to playing</h2>
