@@ -488,7 +488,7 @@ meant to be a repository for data! Consider keeping raw data files on a RAIDed
         `github`.
     5.  (browse to where you want to put it in the "create project as
         subdirectory of:")
-    6.  So it should be in `yourhome/github/reproducible_research`
+    6.  So it should be in `yourhome/github/reproducible_research_practical`
     7.  Hit `Create Project`
 
 ## The status/staging panel {.smaller}
@@ -636,6 +636,7 @@ git commit -m "my commit message"
 ```{bash}
 #| echo: true
 #| eval: false
+
 git stash save
 git pull
 git stash pop # the merge conflict will re um emerge at this point
@@ -684,17 +685,20 @@ git checkout` <COMMIT#> <path/to/the/messed/up/file>
 
 to get back old commits and files as well. But this leads you into a confusing place of working from a "detached head" `r emoji("face screaming in fear")`. Better to do this on Github until you are more comfortable with git.
 
-# Branches and Pull Requests
+## Branches and Pull Requests {.smaller}
 
-Create a new branch
+  - Create a new branch
 
 ```
 git branch fix_issue_105
 git checkout fix_issue_105
 ```
 
-Then issue a pull request.
+  - Work on your code, committing as you go.
 
+  - Then issue a pull request to the owner of the repository (this is done on github). You may need to write a justification of the changes you've made.
+  
+  - The owner of the repository will then be able to review all of the changes you've made (they'll see a diff, just like you do when you commit), and can then choose to merge your code into the main branch.
 
 ## Go for it everyone! Git to playing
 
@@ -704,7 +708,7 @@ Then issue a pull request.
 -   Get familiar with the diff window.
 -   Check the history after a few commits.
 
-# Intro to Rmarkdown
+# Intro to Rmarkdown {.smaller}
 
 -   Designed as a text *markup* language that would be
 
@@ -725,7 +729,7 @@ Then issue a pull request.
 
 ## To Do
 
-Add Merge Conflicts Add Revert Add Rebase Add "github pages" \* Open the
+Add Revert Add Rebase Add "github pages" \* Open the
 shell (Tools->Shell...) and issue these two commands, replacing the name
 "John Doe" with yours, and his email with yours. + Use the email address
 that you gave to GitHub.
